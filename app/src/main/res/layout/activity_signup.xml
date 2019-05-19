@@ -25,7 +25,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputName2"
+            app:layout_constraintTop_toBottomOf="@+id/inputHomeID"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:textColor="@color/colorMainAppFont"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputUsername3" />
+            app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
         <EditText
             android:id="@+id/inputUsername"
@@ -80,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lblUsername" />
 
         <EditText
-            android:id="@+id/inputUsername3"
+            android:id="@+id/inputEmail"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -172,7 +172,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lblName2" />
 
         <EditText
-            android:id="@+id/inputName2"
+            android:id="@+id/inputHomeID"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
