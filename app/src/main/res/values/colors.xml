@@ -6,7 +6,7 @@
     <color name="colorMainApp">#005aac</color>
     <color name="colorMainAppLight">#2e86de</color>
     <color name="colorMainAppDark">#3836BD</color>
-    <color name="colorMainAppFont">#3E4A59</color>
+    <color name="colorMainAppFont">#3e4a59</color>
     <color name="colorMainAppFont2">#222F3E</color>
     <color name="colorGrayDot">#CCDEEE</color>
 </resources>
