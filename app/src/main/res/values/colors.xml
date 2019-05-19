@@ -9,4 +9,5 @@
     <color name="colorMainAppFont">#3e4a59</color>
     <color name="colorMainAppFont2">#222F3E</color>
     <color name="colorGrayDot">#CCDEEE</color>
+    <color name="colorMainWhite">#FFFFFF</color>
 </resources>
