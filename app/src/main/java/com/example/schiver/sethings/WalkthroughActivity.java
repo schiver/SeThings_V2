@@ -56,5 +56,13 @@ public class WalkthroughActivity extends AppCompatActivity {
                 startActivity(signInActivity);
             }
         });
+        Button btnSignUp = (Button) findViewById(R.id.buttonSignUp);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUpActivity = new Intent(WalkthroughActivity.this,SignupActivity.class);
+                startActivity(signUpActivity);
+            }
+        });
     }
 }
