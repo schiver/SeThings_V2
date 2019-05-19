@@ -42,11 +42,17 @@ public class WalkthroughActivity extends AppCompatActivity {
         screenPager = findViewById(R.id.screen_viewpager);
         introViewPagerAdapter = new IntroViewPagerAdapter(this,mList);
         screenPager.setAdapter(introViewPagerAdapter);
-
         tabIndicator.setupWithViewPager(screenPager);
 
         // Sign Up Intent
-
+        Button btnSignUp = (Button) findViewById(R.id.buttonSignUp);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUpActivity = new Intent(WalkthroughActivity.this,SignupActivity.class);
+                startActivity(signUpActivity);
+            }
+        });
         // Login Intent
         Button btnSignIn = (Button) findViewById(R.id.buttonSignIn);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -56,13 +62,7 @@ public class WalkthroughActivity extends AppCompatActivity {
                 startActivity(signInActivity);
             }
         });
-        Button btnSignUp = (Button) findViewById(R.id.buttonSignUp);
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signUpActivity = new Intent(WalkthroughActivity.this,SignupActivity.class);
-                startActivity(signUpActivity);
-            }
-        });
+
+
     }
 }
