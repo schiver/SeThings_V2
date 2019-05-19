@@ -2,6 +2,7 @@ package com.example.schiver.sethings;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,6 +22,6 @@ public class LoginActivity extends AppCompatActivity {
         String name = getColoredSpanned("New user?", "#800000");
         String surName = getColoredSpanned("Sign up here","#000080");
 
-
+        myColoredTextView.setText(Html.fromHtml(name+" "+surName));
     }
 }
