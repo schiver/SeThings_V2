@@ -21,16 +21,18 @@
             android:background="@drawable/bg_btn_default"
             android:text="Sign Up"
             android:textColor="@color/colorMainWhite"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputName2" />
+            app:layout_constraintTop_toBottomOf="@+id/inputName2"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/signupGreeting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="80dp"
             android:text="Hello new account"
             android:textAlignment="center"
@@ -40,40 +42,66 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/lblEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="Email"
+            android:textColor="@color/colorMainAppFont"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signupGreeting" />
+
+        <TextView
             android:id="@+id/lblUsername"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="11dp"
             android:text="Username"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signupGreeting" />
+            app:layout_constraintTop_toBottomOf="@+id/inputUsername3" />
 
         <EditText
             android:id="@+id/inputUsername"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/colorMainApp"
             android:ems="10"
-            android:hint="Enter Username"
+            android:hint=" 8-12 character"
             android:inputType="textPersonName"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblUsername" />
+
+        <EditText
+            android:id="@+id/inputUsername3"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorMainApp"
+            android:ems="10"
+            android:hint="Ex : yourmailaddress@mail.com"
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblEmail" />
 
         <TextView
             android:id="@+id/lblPassword"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="11dp"
             android:text="Password"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
 
@@ -81,13 +109,13 @@
             android:id="@+id/inputPassword"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/colorMainApp"
             android:ems="10"
-            android:hint="Enter Password"
+            android:hint="*************"
             android:inputType="textPassword"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblPassword" />
 
@@ -99,7 +127,7 @@
             android:layout_marginTop="11dp"
             android:text="Confirm password"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
@@ -107,37 +135,25 @@
             android:id="@+id/inputConfirmPassword"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/colorMainApp"
             android:ems="10"
-            android:hint="Enter Password Again"
+            android:hint="*************"
             android:inputType="textPassword"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblPassword2" />
-
-        <TextView
-            android:id="@+id/lblName"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="11dp"
-            android:text="Name"
-            android:textColor="@color/colorMainAppFont"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword" />
 
         <TextView
             android:id="@+id/lblName2"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="5dp"
             android:text="Name"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword" />
 
@@ -145,13 +161,13 @@
             android:id="@+id/inputName"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/colorMainApp"
             android:ems="10"
-            android:hint="Enter Name"
+            android:hint="Example : Jhon Doe"
             android:inputType="textPersonName"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblName2" />
 
@@ -159,13 +175,13 @@
             android:id="@+id/inputName2"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/colorMainApp"
             android:ems="10"
-            android:hint="Enter Name"
+            android:hint="Your home ID"
             android:inputType="textPersonName"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblName3" />
 
@@ -174,12 +190,22 @@
             android:layout_width="wrap_content"
             android:layout_height="28dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="Home-Id"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputName" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

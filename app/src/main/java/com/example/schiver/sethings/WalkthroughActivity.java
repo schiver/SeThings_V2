@@ -51,10 +51,6 @@ public class WalkthroughActivity extends AppCompatActivity {
         screenPager.setAdapter(introViewPagerAdapter);
         tabIndicator.setupWithViewPager(screenPager);
 
-        // Firebase
-        myDb = FirebaseDatabase.getInstance();
-        dbRef = myDb.getReference("SeThings-Coba");
-
         // Sign Up Intent
         Button btnSignUp = (Button) findViewById(R.id.buttonSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
