@@ -20,11 +20,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         myColoredTextView = (TextView) findViewById(R.id.sign_upText);
         String name = getColoredSpanned("New user?", "#3e4a59");
         String surName = getColoredSpanned("SignUp Here","#3836BD");
-
         myColoredTextView.setText(Html.fromHtml(name+" "+surName));
     }
 }
