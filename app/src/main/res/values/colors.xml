@@ -10,4 +10,5 @@
     <color name="colorMainAppFont2">#222F3E</color>
     <color name="colorGrayDot">#CCDEEE</color>
     <color name="colorMainWhite">#FFFFFF</color>
+    <color name="colorMainAppDarkPressed">#000e8c</color>
 </resources>

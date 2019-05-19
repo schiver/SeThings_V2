@@ -3,9 +3,9 @@
     <item android:state_pressed="true" >
         <shape android:shape="rectangle"  >
             <corners android:radius="10dip" />
-            <stroke android:width="1dip" android:color="@color/colorMainAppLight" />
+            <stroke android:width="1dip" android:color="@color/colorMainAppDarkPressed" />
             <solid
-                android:color="@color/colorMainAppLight"/>
+                android:color="@color/colorMainAppDarkPressed"/>
         </shape>
     </item>
     <item android:state_focused="true">

@@ -1,6 +1,7 @@
 package com.example.schiver.sethings;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,11 @@ import android.widget.Button;
 
 import com.example.schiver.sethings.Adapter.IntroViewPagerAdapter;
 import com.example.schiver.sethings.Model.ScreenItem;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +25,8 @@ public class WalkthroughActivity extends AppCompatActivity {
     private ViewPager screenPager;
     IntroViewPagerAdapter introViewPagerAdapter;
     TabLayout tabIndicator;
-
+    FirebaseDatabase myDb;
+    DatabaseReference dbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,10 @@ public class WalkthroughActivity extends AppCompatActivity {
         introViewPagerAdapter = new IntroViewPagerAdapter(this,mList);
         screenPager.setAdapter(introViewPagerAdapter);
         tabIndicator.setupWithViewPager(screenPager);
+
+        // Firebase
+        myDb = FirebaseDatabase.getInstance();
+        dbRef = myDb.getReference("SeThings-Coba");
 
         // Sign Up Intent
         Button btnSignUp = (Button) findViewById(R.id.buttonSignUp);
