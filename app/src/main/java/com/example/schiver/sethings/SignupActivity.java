@@ -10,11 +10,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schiver.sethings.Model.UserData;
+import com.example.schiver.sethings.Utils.AESUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
     ConstraintLayout myLayout;
+    ImageView mArrowBack;
 
     Handler handler;
     Runnable runnable;
@@ -67,11 +70,17 @@ public class SignupActivity extends AppCompatActivity {
 
 
         Button btnSubmit = (Button) findViewById(R.id.buttonSignUp);
+        mArrowBack = (ImageView) findViewById(R.id.back_arrow);
+        mArrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent walkThroughIntent = new Intent(SignupActivity.this, WalkthroughActivity.class);
+                startActivity(walkThroughIntent);
+            }
+        });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 progressBar.setVisibility(View.VISIBLE);
                 myLayout.setAlpha(0.5f);
                 // Setting focusable editText to false
@@ -82,7 +91,6 @@ public class SignupActivity extends AppCompatActivity {
                 getName.setFocusable(false);
                 getHome.setFocusable(false);
 
-
                 // Start handler time
                 handler = new Handler();
                 runnable = new Runnable() {
@@ -92,21 +100,6 @@ public class SignupActivity extends AppCompatActivity {
                         myLayout.setAlpha(1);
                         progressBar.setVisibility(View.GONE);
                         validateForm();
-
-                        /*if(getPass.getText().toString().equals(getConfirmPass.getText().toString())){
-                            signUp();
-                            Intent successIntent = new Intent(SignupActivity.this,SuccessSignupActivity.class);
-                            startActivity(successIntent);
-                            Toast.makeText(SignupActivity.this, "Success PUSH", Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(SignupActivity.this, "Confirm password didn't match", Toast.LENGTH_LONG).show();
-                            getEmail.setFocusable(true);
-                            getUsername.setFocusable(true);
-                            getPass.setFocusable(true);
-                            getConfirmPass.setFocusable(true);
-                            getName.setFocusable(true);
-                            getHome.setFocusable(true);
-                        }*/
                     }
                 };
                 timer = new Timer();
@@ -115,10 +108,12 @@ public class SignupActivity extends AppCompatActivity {
                     public void run() {
                         handler.post(runnable);
                     }
-                },5000,3000);
+                },3000,3000);
             }
         });
     }
+
+    // Other method
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -185,7 +180,8 @@ public class SignupActivity extends AppCompatActivity {
 
         // Final validation
         if(valid1 == true && valid2 == true && valid3 == true && valid4 == true && valid5 == true && valid6 == true){
-            Toast.makeText(SignupActivity.this, "Success PUSH", Toast.LENGTH_LONG).show();
+            //Toast.makeText(SignupActivity.this, "Success PUSH", Toast.LENGTH_LONG).show();
+            signUp();
         }else{
 
         }
@@ -200,16 +196,23 @@ public class SignupActivity extends AppCompatActivity {
     }
     private void signUp(){
         final ArrayList<String> signUpData = new ArrayList<>();
+        String encryptedPass = "";
         signUpData.add(getEmail.getText().toString());
         signUpData.add(getUsername.getText().toString());
         signUpData.add(getPass.getText().toString());
         signUpData.add(getName.getText().toString());
         signUpData.add(getHome.getText().toString());
+
+        try{
+            encryptedPass = AESUtils.encrypt(signUpData.get(2));
+        }catch (Exception e){
+
+        }
         final UserData postSignUp =
                 new UserData(
                         signUpData.get(0),
                         signUpData.get(1),
-                        signUpData.get(2),
+                        encryptedPass,
                         signUpData.get(3),
                         signUpData.get(4)
                 );
@@ -220,6 +223,8 @@ public class SignupActivity extends AppCompatActivity {
                     getUsername.setError("Username already registered");
                 }else{
                     dbRef.child(postSignUp.getUsername()).setValue(postSignUp);
+                    Intent successIntent = new Intent(SignupActivity.this,SuccessSignupActivity.class);
+                    startActivity(successIntent);
                 }
             }
 

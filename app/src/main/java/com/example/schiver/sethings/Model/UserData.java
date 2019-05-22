@@ -11,6 +11,10 @@ public class UserData {
         HomeID = homeID;
     }
 
+    public UserData(){
+
+    }
+
     public String getEmail() {
         return Email;
     }
