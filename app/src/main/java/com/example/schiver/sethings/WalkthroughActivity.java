@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.schiver.sethings.Adapter.IntroViewPagerAdapter;
 import com.example.schiver.sethings.Model.ScreenItem;
@@ -18,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class WalkthroughActivity extends AppCompatActivity {
@@ -27,7 +29,8 @@ public class WalkthroughActivity extends AppCompatActivity {
     TabLayout tabIndicator;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
-
+    ArrayList<String> testArray = new ArrayList<>();
+    List<String> input = Arrays.asList("A","B");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +72,5 @@ public class WalkthroughActivity extends AppCompatActivity {
                 startActivity(signInActivity);
             }
         });
-
-
     }
 }

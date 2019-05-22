@@ -181,9 +181,13 @@ public class SignupActivity extends AppCompatActivity {
             valid6 = true;
         }
 
+
+
         // Final validation
         if(valid1 == true && valid2 == true && valid3 == true && valid4 == true && valid5 == true && valid6 == true){
             Toast.makeText(SignupActivity.this, "Success PUSH", Toast.LENGTH_LONG).show();
+        }else{
+
         }
 
 
@@ -213,7 +217,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child(postSignUp.getUsername()).exists()){
-                    Toast.makeText(SignupActivity.this, "User already registered", Toast.LENGTH_LONG).show();
+                    getUsername.setError("Username already registered");
                 }else{
                     dbRef.child(postSignUp.getUsername()).setValue(postSignUp);
                 }
