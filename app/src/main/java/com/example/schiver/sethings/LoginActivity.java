@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn(inputUsername.getText().toString() , inputPassword.getText().toString());
-                
+
             }
         });
     }
@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn(String userName, String password){
         myDb = FirebaseDatabase.getInstance();
         dbRef = myDb.getReference("SeThings-Users");
-
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
