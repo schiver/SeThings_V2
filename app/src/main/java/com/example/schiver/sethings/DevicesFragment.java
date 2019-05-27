@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -84,7 +86,13 @@ public class DevicesFragment extends Fragment {
                    }
                    mRecyclerView.setAdapter(mAdapter);
                }else{
-                   Toast.makeText(getContext(), "Data Tidak Ada", Toast.LENGTH_SHORT).show();
+                   EmptyRoomFragment emptyRoomFragment = new EmptyRoomFragment();
+                   FragmentManager mFragmentManager = getFragmentManager();
+                   FragmentTransaction mFragmentTransaction  = mFragmentManager.beginTransaction().
+                           replace(R.id.fragment_container,emptyRoomFragment,EmptyRoomFragment.class.getSimpleName());
+                   mFragmentTransaction.addToBackStack(null).commit();
+
+                   //Toast.makeText(getContext(), "Data Tidak Ada", Toast.LENGTH_SHORT).show();
                }
                mAdapter.notifyDataSetChanged();
            }
