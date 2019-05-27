@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.example.schiver.sethings.Model.DashboardData;
 import com.example.schiver.sethings.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder> {
@@ -23,7 +21,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         public DashboardViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTextViewRoom = itemView.findViewById(R.id.room_name);
+            mTextViewRoom = itemView.findViewById(R.id.input_room_name);
             mTextViewDevice = itemView.findViewById(R.id.installed_device);
             mTextViewUsage = itemView.findViewById(R.id.usage_percentage);
         }
