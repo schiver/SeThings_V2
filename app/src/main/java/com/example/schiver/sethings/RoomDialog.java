@@ -3,6 +3,7 @@ package com.example.schiver.sethings;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -79,6 +80,8 @@ public class RoomDialog extends AppCompatDialogFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbRef.child(roomData.getRoomName()).setValue(roomData);
+                Intent intent = getActivity().getIntent();
+                startActivity(intent);
             }
 
             @Override
