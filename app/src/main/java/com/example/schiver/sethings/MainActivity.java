@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mytoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
-       // logout = (Button) findViewById(R.id.button);
+        // logout = (Button) findViewById(R.id.button);
         /*logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new HomeFragment())
                 .commit();
+
+
+
         mySession();
     }
 

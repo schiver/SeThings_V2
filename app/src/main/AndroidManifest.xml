@@ -19,7 +19,8 @@
         <activity android:name=".WalkthroughActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".SuccessSignupActivity"></activity>
+        <activity android:name=".SuccessSignupActivity" />
+        <activity android:name=".DeviceListActivity"></activity>
     </application>
 
 </manifest>

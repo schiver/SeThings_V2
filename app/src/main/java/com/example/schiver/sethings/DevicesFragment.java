@@ -12,11 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.schiver.sethings.Adapter.DashboardAdapter;
 import com.example.schiver.sethings.Adapter.DeviceRoomAdapter;
-import com.example.schiver.sethings.Model.RoomDataAdapter;
+import com.example.schiver.sethings.Model.RoomAdapterData;
 import com.example.schiver.sethings.Model.RoomListData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,24 +30,24 @@ public class DevicesFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
-    ArrayList<RoomDataAdapter> roomDataList = new ArrayList<>();
+    ArrayList<RoomAdapterData> roomDataList = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_devices,container,false);
-        //final ArrayList<RoomDataAdapter> roomDataList = new ArrayList<>();
+        //final ArrayList<RoomAdapterData> roomDataList = new ArrayList<>();
 
-        /*roomDataList.add(new RoomDataAdapter("Livingroom","2"));
-        roomDataList.add(new RoomDataAdapter("Livingroom","2"));
-        roomDataList.add(new RoomDataAdapter("Livingroom","2"));
-        roomDataList.add(new RoomDataAdapter("Livingroom","2"));
-        roomDataList.add(new RoomDataAdapter("Livingroom","2"));
-        roomDataList.add(new RoomDataAdapter("Livingroom","2"));*/
+        /*roomDataList.add(new RoomAdapterData("Livingroom","2"));
+        roomDataList.add(new RoomAdapterData("Livingroom","2"));
+        roomDataList.add(new RoomAdapterData("Livingroom","2"));
+        roomDataList.add(new RoomAdapterData("Livingroom","2"));
+        roomDataList.add(new RoomAdapterData("Livingroom","2"));
+        roomDataList.add(new RoomAdapterData("Livingroom","2"));*/
 
         mRecyclerView = rootView.findViewById(R.id.room_recycler);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity() , LinearLayoutManager.VERTICAL, false);
-        mAdapter = new DeviceRoomAdapter(roomDataList);
+        mAdapter = new DeviceRoomAdapter(roomDataList,getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
@@ -82,7 +80,7 @@ public class DevicesFragment extends Fragment {
                    roomDataList.clear();
                    for (DataSnapshot ds : dataSnapshot.getChildren()){
                        RoomListData dataRoom = ds.getValue(RoomListData.class);
-                       roomDataList.add(new RoomDataAdapter(dataRoom.getRoomName() ,"1"));
+                       roomDataList.add(new RoomAdapterData(dataRoom.getRoomName() ,"1"));
                    }
                    mRecyclerView.setAdapter(mAdapter);
                }else{

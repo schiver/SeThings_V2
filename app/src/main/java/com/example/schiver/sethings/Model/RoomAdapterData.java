@@ -2,14 +2,14 @@ package com.example.schiver.sethings.Model;
 
 import java.util.ArrayList;
 
-public class RoomDataAdapter {
+public class RoomAdapterData {
     private String roomName , installerdDevice;
 
-    public RoomDataAdapter(ArrayList<RoomDataAdapter> roomDataList){
+    public RoomAdapterData(ArrayList<RoomAdapterData> roomDataList){
 
     }
 
-    public RoomDataAdapter(String roomName, String installerdDevice) {
+    public RoomAdapterData(String roomName, String installerdDevice) {
         this.roomName = roomName;
         this.installerdDevice = installerdDevice;
     }
