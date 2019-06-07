@@ -29,7 +29,7 @@
             android:layout_marginTop="8dp"
             android:text="Device_id"
             android:textColor="@color/colorMainAppFont2"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:text="Configure"
             android:textColor="@color/colorMainAppDark"
@@ -53,7 +53,7 @@
             android:layout_marginTop="32dp"
             android:text="Device_id"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="12sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/device_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,19 +61,18 @@
             android:id="@+id/device_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="9dp"
             android:layout_marginTop="56dp"
             android:text="Device information"
-            android:textSize="11sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@+id/device_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/device_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/device_id"
             tools:srcCompat="@tools:sample/avatars[0]" />

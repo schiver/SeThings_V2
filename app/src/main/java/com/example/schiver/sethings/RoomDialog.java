@@ -13,7 +13,9 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.schiver.sethings.Model.RoomListData;
 import com.google.firebase.database.DataSnapshot;
@@ -31,8 +33,10 @@ public class RoomDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_add_device,null);
+        View view = inflater.inflate(R.layout.dialog_add_room,null);
         inputRoomName = view.findViewById(R.id.input_room_name);
+
+
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.parseColor("#3e4a59"));
 
         // Initialize a new spannable string builder instance
@@ -71,17 +75,17 @@ public class RoomDialog extends AppCompatDialogFragment {
         return myDialog;
     }
 
-    public void submitRoomData(final String roomName){
+    public void submitRoomData(String roomName){
         myDb = FirebaseDatabase.getInstance();
-        dbRef = myDb.getReference("SeThings-TEST");
+        dbRef = myDb.getReference("SeThings-Room");
 
         final RoomListData roomData = new RoomListData(roomName);
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbRef.child(roomData.getRoomName()).setValue(roomData);
-                Intent intent = getActivity().getIntent();
-                startActivity(intent);
+                //Intent intent = getActivity().getIntent();
+                //startActivity(intent);
             }
 
             @Override

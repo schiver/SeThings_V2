@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SeThings</string>
+    <string-array name="dev_type">
+        <item>Select option below</item>
+        <item>Sensor</item>
+        <item>Output</item>
+    </string-array>
+    <string-array name="dev_name">
+        <item>Select option below</item>
+    </string-array>
 </resources>
