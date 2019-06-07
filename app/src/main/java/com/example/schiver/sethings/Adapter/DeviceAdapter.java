@@ -1,7 +1,10 @@
 package com.example.schiver.sethings.Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +16,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.schiver.sethings.DeviceDeleteDialog;
+import com.example.schiver.sethings.DeviceDialog;
+import com.example.schiver.sethings.DeviceEditDialog;
 import com.example.schiver.sethings.Model.DeviceAdapterData;
 import com.example.schiver.sethings.R;
 
@@ -72,12 +78,14 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
                         switch (item.getItemId()) {
                             case R.id.menuEdit:
                                 //handle menu1 click
-                                Toast.makeText(insideView.getContext(), "Edit "+currentItem.getDeviceID(), Toast.LENGTH_SHORT).show();
+                                openDialogEdit(insideView.getContext(),currentItem.getDeviceID());
+                                //Toast.makeText(insideView.getContext(), "Edit "+currentItem.getDeviceID(), Toast.LENGTH_SHORT).show();
                                 //editShowDialog(insideView,currentItem.getmDeviceId(),currentItem.getmText1(),currentItem.getmText2());
                                 break;
                             case R.id.menuDelete:
                                 //handle menu2 click
-                                Toast.makeText(insideView.getContext(), "Delete "+currentItem.getDeviceID(), Toast.LENGTH_SHORT).show();
+                                openDialogDelete(insideView.getContext(),currentItem.getDeviceID());
+                                //Toast.makeText(insideView.getContext(), "Delete "+currentItem.getDeviceID(), Toast.LENGTH_SHORT).show();
                                 //confirmDelete(currentItem.getmDeviceId());
                                 break;
                         }
@@ -87,6 +95,22 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
                 popup.show();
             }
         });
+    }
+
+    public void openDialogEdit(Context context, String deviceID){
+        DeviceEditDialog editDialog = new DeviceEditDialog();
+        Bundle param = new Bundle();
+        param.putString("devID",deviceID);;
+        editDialog.setArguments(param);
+        editDialog.show(((AppCompatActivity) context).getSupportFragmentManager(),"EDIT");
+    }
+
+    public void openDialogDelete(Context context, String deviceID){
+        DeviceDeleteDialog deleteDialog = new DeviceDeleteDialog();
+        Bundle paramDevID = new Bundle();
+        paramDevID.putString("devID",deviceID);
+        deleteDialog.setArguments(paramDevID);
+        deleteDialog.show(((AppCompatActivity) context).getSupportFragmentManager(),"DELETE");
     }
 
     @Override
