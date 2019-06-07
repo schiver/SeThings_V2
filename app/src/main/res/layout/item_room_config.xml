@@ -28,11 +28,13 @@
             android:id="@+id/installed_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
             android:text="5"
             android:textColor="@color/colorMainApp"
             android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_room_name" />
 
@@ -40,14 +42,12 @@
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="164dp"
             android:text="Installed device"
             android:textColor="@color/colorMainAppFont"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/installed_device"
+            app:layout_constraintEnd_toStartOf="@+id/switch1"
             app:layout_constraintTop_toBottomOf="@+id/input_room_name" />
 
         <TextView
@@ -62,6 +62,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            android:theme="@style/SCBSwitch"/>
     </android.support.constraint.ConstraintLayout>
 
 

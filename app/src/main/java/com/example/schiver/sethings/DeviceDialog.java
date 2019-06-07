@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.DeviceListData;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,8 @@ public class DeviceDialog extends AppCompatDialogFragment {
     private Spinner optionType,optionName;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
+    FirebaseDatabase myDb2;
+    DatabaseReference dbRef2;
     private int iconName;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -205,6 +208,33 @@ public class DeviceDialog extends AppCompatDialogFragment {
 
             }
         });
+        myDb2 = FirebaseDatabase.getInstance();
+        dbRef2 = myDb2.getReference("SeThings-Config/"+room+"/");
+        final ConfigDeviceData myConfig = new ConfigDeviceData(
+                                                iconName,
+                                                deviceId,
+                                                deviceType,
+                                                deviceName,
+                                                "#",
+                                                "#",
+                                                "#",
+                                                "#",
+                                                "#",
+                                                "#"
+                                            );
+        dbRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef2.child(myConfig.getDeviceID()).setValue(myConfig);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
 

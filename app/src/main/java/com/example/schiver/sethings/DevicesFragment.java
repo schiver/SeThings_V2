@@ -120,7 +120,7 @@ public class DevicesFragment extends Fragment {
                    /*EmptyRoomFragment emptyRoomFragment = new EmptyRoomFragment();
                    FragmentManager mFragmentManager = getFragmentManager();
                    FragmentTransaction mFragmentTransaction  = mFragmentManager.beginTransaction().
-                           replace(R.id.fragment_container,emptyRoomFragment,EmptyRoomFragment.class.getSimpleName());
+                   replace(R.id.fragment_container,emptyRoomFragment,EmptyRoomFragment.class.getSimpleName());
                    mFragmentTransaction.addToBackStack(null).commit();*/
                    //Toast.makeText(getContext(), "Data Tidak Ada", Toast.LENGTH_SHORT).show();
                }
