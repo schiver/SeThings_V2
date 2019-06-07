@@ -39,7 +39,7 @@ public class DevicesFragment extends Fragment {
     FirebaseDatabase myDb2;
     DatabaseReference dbRef2;
     ArrayList<RoomAdapterData> roomDataList = new ArrayList<>();
-    List<String> test = new ArrayList<>();
+    ArrayList<String> dataRoomName = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,6 +80,7 @@ public class DevicesFragment extends Fragment {
     public void onResume() {
         super.onResume();
         myDb = FirebaseDatabase.getInstance();
+        myDb2 = FirebaseDatabase.getInstance();
         dbRef = myDb.getReference("SeThings-Room");
         dbRef.addValueEventListener(new ValueEventListener() {
            @Override
@@ -123,9 +124,7 @@ public class DevicesFragment extends Fragment {
                    mFragmentTransaction.addToBackStack(null).commit();*/
                    //Toast.makeText(getContext(), "Data Tidak Ada", Toast.LENGTH_SHORT).show();
                }
-
            }
-
            @Override
            public void onCancelled(@NonNull DatabaseError databaseError) {
 

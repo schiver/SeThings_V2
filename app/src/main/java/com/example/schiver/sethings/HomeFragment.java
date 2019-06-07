@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
         dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));
         dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));
         dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));
+
         mRecyclerView = rootView.findViewById(R.id.dashboad_recycler);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity() , LinearLayoutManager.VERTICAL, false);
