@@ -1,6 +1,7 @@
 package com.example.schiver.sethings.Adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.schiver.sethings.Model.ConfigDeviceAdapterData;
 import com.example.schiver.sethings.Model.DeviceAdapterData;
 import com.example.schiver.sethings.R;
 
@@ -15,22 +17,24 @@ import java.util.ArrayList;
 
 public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapter.DeviceConfigViewHolder> {
 
-    private ArrayList<DeviceAdapterData> mDeviceList;
+    private ArrayList<ConfigDeviceAdapterData> mDeviceList;
     public class DeviceConfigViewHolder extends RecyclerView.ViewHolder{
         public ImageView mDeviceIcon;
         public TextView mDeviceID;
         public TextView mDeviceName;
         public TextView mDeviceInfo;
+        public CardView mContainer;
         public DeviceConfigViewHolder(@NonNull View itemView) {
             super(itemView);
             mDeviceIcon = itemView.findViewById(R.id.device_icon);
             mDeviceName = itemView.findViewById(R.id.device_name);
             mDeviceID   = itemView.findViewById(R.id.device_id);
             mDeviceInfo = itemView.findViewById(R.id.device_information);
+            mContainer  = itemView.findViewById(R.id.cardConfig);
         }
     }
 
-    public DeviceConfigAdapter(ArrayList<DeviceAdapterData> mDeviceList) {
+    public DeviceConfigAdapter(ArrayList<ConfigDeviceAdapterData> mDeviceList) {
         this.mDeviceList = mDeviceList;
     }
 
@@ -44,15 +48,23 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
 
     @Override
     public void onBindViewHolder(@NonNull DeviceConfigViewHolder deviceConfigViewHolder, int i) {
-        final DeviceAdapterData currentItem = mDeviceList.get(i);
+        final ConfigDeviceAdapterData currentItem = mDeviceList.get(i);
         deviceConfigViewHolder.mDeviceIcon.setImageResource(currentItem.getmImageResource());
         deviceConfigViewHolder.mDeviceID.setText(currentItem.getDeviceID());
         deviceConfigViewHolder.mDeviceName.setText(currentItem.getDeviceName());
         deviceConfigViewHolder.mDeviceInfo.setText(currentItem.getDeviceInfo());
+        deviceConfigViewHolder.mContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return mDeviceList.size();
     }
+
+
 }

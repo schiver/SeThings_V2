@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.schiver.sethings.Adapter.DeviceAdapter;
 import com.example.schiver.sethings.Adapter.DeviceConfigAdapter;
+import com.example.schiver.sethings.Model.ConfigDeviceAdapterData;
 import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.DeviceAdapterData;
 import com.example.schiver.sethings.Model.DeviceListData;
@@ -37,7 +38,7 @@ public class ConfigActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
-    ArrayList<DeviceAdapterData> deviceDataList =  new ArrayList<>();
+    ArrayList<ConfigDeviceAdapterData> deviceDataList =  new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,11 +105,12 @@ public class ConfigActivity extends AppCompatActivity {
                             devInfo = dataDevice.getDeviceCondition();
                         }
                         deviceDataList.add(
-                                new DeviceAdapterData(
+                                new ConfigDeviceAdapterData(
                                         dataDevice.getIcon(),
                                         dataDevice.getDeviceName(),
                                         dataDevice.getDeviceID(),
-                                        devInfo
+                                        devInfo,
+                                        dataDevice.getDeviceType()
                                 )
                         );
                     }
