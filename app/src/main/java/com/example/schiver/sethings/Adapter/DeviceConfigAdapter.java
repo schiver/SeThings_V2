@@ -1,6 +1,9 @@
 package com.example.schiver.sethings.Adapter;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.schiver.sethings.DeviceConfigDialog;
+import com.example.schiver.sethings.DeviceEditDialog;
 import com.example.schiver.sethings.Model.ConfigDeviceAdapterData;
 import com.example.schiver.sethings.Model.DeviceAdapterData;
 import com.example.schiver.sethings.R;
@@ -16,7 +22,7 @@ import com.example.schiver.sethings.R;
 import java.util.ArrayList;
 
 public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapter.DeviceConfigViewHolder> {
-
+    //Context mContext;
     private ArrayList<ConfigDeviceAdapterData> mDeviceList;
     public class DeviceConfigViewHolder extends RecyclerView.ViewHolder{
         public ImageView mDeviceIcon;
@@ -41,7 +47,7 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
     @NonNull
     @Override
     public DeviceConfigViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_device,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_device_config,viewGroup,false);
         DeviceConfigAdapter.DeviceConfigViewHolder dcvh = new DeviceConfigAdapter.DeviceConfigViewHolder(v);
         return dcvh;
     }
@@ -56,6 +62,11 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
         deviceConfigViewHolder.mContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!currentItem.getDevicrType().equals("Sensor")){
+                    openDialogConfig(v.getContext(),currentItem.getDeviceID(),currentItem.getDeviceName(),currentItem.getDevicrType(),currentItem.getmImageResource());
+                }else{
+                    Toast.makeText(v.getContext(),"You can only configure output type device",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -66,5 +77,15 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
         return mDeviceList.size();
     }
 
+    public void openDialogConfig(Context context, String deviceID, String deviceName, String deviceType, int deviceIcon){
+        DeviceConfigDialog configDialog = new DeviceConfigDialog();
+        Bundle param = new Bundle();
+        param.putString("devID",deviceID);
+        param.putString("devName",deviceName);
+        param.putString("deviceType",deviceType);
+        param.putInt("devIcon",deviceIcon);
+        configDialog.setArguments(param);
+        configDialog.show(((AppCompatActivity) context).getSupportFragmentManager(),"CONFIG");
+    }
 
 }

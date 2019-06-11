@@ -3,7 +3,6 @@ package com.example.schiver.sethings;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,12 +12,10 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.DeviceListData;
@@ -31,8 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.layout.simple_spinner_item;
 
 public class DeviceDialog extends AppCompatDialogFragment {
     private EditText inputDeviceID;
@@ -53,7 +48,7 @@ public class DeviceDialog extends AppCompatDialogFragment {
         // Setting up input for dialog
         inputDeviceID = view.findViewById(R.id.input_device_id);
         optionName = view.findViewById(R.id.spinner_name);
-        optionType = view.findViewById(R.id.spinner_type);
+        optionType = view.findViewById(R.id.spinner_condition);
 
         // Create default list for dropdown input dialog
         List<String> list = new ArrayList<String>();

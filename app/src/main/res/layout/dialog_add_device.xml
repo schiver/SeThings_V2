@@ -52,10 +52,10 @@
         android:text="Device-Name"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_type" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_condition" />
 
     <Spinner
-        android:id="@+id/spinner_type"
+        android:id="@+id/spinner_condition"
         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
         android:layout_width="280dp"
         android:layout_height="wrap_content"

@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.DeviceListData;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,8 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
     private Spinner optionType,optionName;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
+    FirebaseDatabase myDb2;
+    DatabaseReference dbRef2;
     private String deviceID;
     private String roomName;
     private int iconName;
@@ -51,7 +54,7 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
         // Setting up input for dialog
         inputDeviceID = view.findViewById(R.id.input_device_id);
         optionName = view.findViewById(R.id.spinner_name);
-        optionType = view.findViewById(R.id.spinner_type);
+        optionType = view.findViewById(R.id.spinner_condition);
 
         inputDeviceID.setText(deviceID);
         inputDeviceID.setEnabled(false);
@@ -202,6 +205,31 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbRef.child(deviceData.getDeviceID()).setValue(deviceData);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        myDb2 = FirebaseDatabase.getInstance();
+        dbRef2 = myDb2.getReference("SeThings-Config/"+room+"/");
+        final ConfigDeviceData myConfig = new ConfigDeviceData(
+                iconName,
+                deviceId,
+                deviceType,
+                deviceName,
+                "#",
+                "#",
+                "#",
+                "#",
+                "#",
+                "#"
+        );
+        dbRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef2.child(myConfig.getDeviceID()).setValue(myConfig);
             }
 
             @Override
