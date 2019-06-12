@@ -10,6 +10,59 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/sub_scheduled_picker_end"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_timer_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sub_scheduled_input_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sub_scheduled_input_end"
+            app:layout_constraintTop_toBottomOf="@+id/sub_scheduled_picker_start" />
+
+        <EditText
+            android:id="@+id/sub_timer_input"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/colorMainApp"
+            android:ems="10"
+            android:hint="Duration"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_sub_condition" />
+
+        <EditText
+            android:id="@+id/sub_scheduled_input_start"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorMainApp"
+            android:ems="10"
+            android:hint="Start time"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sub_timer_input" />
+
+        <EditText
+            android:id="@+id/sub_scheduled_input_end"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorMainApp"
+            android:ems="10"
+            android:hint="End Time"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sub_scheduled_input_start" />
+
         <TextView
             android:id="@+id/labelName"
             android:layout_width="wrap_content"
@@ -76,7 +129,7 @@
             android:text="Device-Action"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_sub_condition" />
+            app:layout_constraintTop_toBottomOf="@+id/sub_scheduled_input_end" />
 
         <Spinner
             android:id="@+id/spinner_condition"
@@ -124,12 +177,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="30dp"
             android:backgroundTint="@color/colorMainApp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/textView11"
+            app:layout_constraintVertical_bias="1.0" />
 
         <SeekBar
             android:id="@+id/conditionValue"
@@ -208,18 +262,41 @@
             app:layout_constraintTop_toBottomOf="@+id/sensor_value" />
 
         <Button
+            android:id="@+id/sub_time_picker"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_timer_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sub_timer_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sub_timer_input"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_sub_condition" />
+
+        <Button
+            android:id="@+id/sub_scheduled_picker_start"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_timer_black_24dp"
+            app:layout_constraintBottom_toTopOf="@+id/sub_scheduled_input_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sub_scheduled_input_start" />
+
+        <Button
             android:id="@+id/scheduled_picker_start"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/ic_timer_black_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/scheduled_input_start"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/scheduled_input_start"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_condition"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintStart_toEndOf="@+id/scheduled_input_start" />
 
         <Button
             android:id="@+id/scheduled_picker_end"
@@ -228,12 +305,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/ic_timer_black_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/scheduled_input_end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/scheduled_input_end"
-            app:layout_constraintTop_toBottomOf="@+id/scheduled_picker_start" />
+            app:layout_constraintTop_toBottomOf="@+id/scheduled_picker_start"
+            app:layout_constraintVertical_bias="1.0" />
 
         <RadioGroup
             android:id="@+id/radio_group"

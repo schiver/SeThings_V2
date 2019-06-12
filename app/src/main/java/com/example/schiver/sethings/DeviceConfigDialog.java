@@ -26,7 +26,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.schiver.sethings.Model.ConfigDeviceData;
-import com.example.schiver.sethings.Model.DeviceListData;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,11 +33,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-public class DeviceConfigDialog extends AppCompatDialogFragment implements TimePickerDialog.OnTimeSetListener {
+public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  TimePickerDialog.OnTimeSetListener*/{
+    TimePickerDialog.OnTimeSetListener from_dateListener,to_dateListener;
     private String deviceID,deviceName,deviceType;
     private int deviceIcon;
     private String roomName;
@@ -49,10 +47,10 @@ public class DeviceConfigDialog extends AppCompatDialogFragment implements TimeP
     private SeekBar sConditionValue;
     private TextView sensorValue,labelName;
     private ImageView mDeviceIcon;
-    private Button timerPicker,timerStart,timerEnd;
-    private EditText timerInput;
+    private Button timerPicker,timerStart,timerEnd, subTimerPicker, subTimerStart, subTimerEnd;
     private RadioGroup radioOption;
-    private EditText inputStart, inputEnd;
+    private EditText timerInput,subTimerInput;
+    private EditText inputStart, inputEnd, subInputStart, subInputEnd;
     private int hour,minutes;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
@@ -83,6 +81,13 @@ public class DeviceConfigDialog extends AppCompatDialogFragment implements TimeP
         inputEnd = view.findViewById(R.id.scheduled_input_end);
         timerStart = view.findViewById(R.id.scheduled_picker_start);
         timerEnd = view.findViewById(R.id.scheduled_picker_end);
+
+        subTimerPicker = view.findViewById(R.id.sub_time_picker);
+        subTimerInput = view.findViewById(R.id.sub_timer_input);
+        subInputStart = view.findViewById(R.id.sub_scheduled_input_start);
+        subInputEnd = view.findViewById(R.id.sub_scheduled_input_end);
+        subTimerStart = view.findViewById(R.id.sub_scheduled_picker_start);
+        subTimerEnd = view.findViewById(R.id.sub_scheduled_picker_end);
         radioOption = view.findViewById(R.id.radio_group);
 
         radioOption.setVisibility(View.GONE);
@@ -93,6 +98,13 @@ public class DeviceConfigDialog extends AppCompatDialogFragment implements TimeP
         timerPicker.setVisibility(View.GONE);
         timerStart.setVisibility(View.GONE);
         timerEnd.setVisibility(View.GONE);
+
+        subTimerInput.setVisibility(View.GONE);
+        subInputStart.setVisibility(View.GONE);
+        subInputEnd.setVisibility(View.GONE);
+        subTimerPicker.setVisibility(View.GONE);
+        subTimerStart.setVisibility(View.GONE);
+        subTimerEnd.setVisibility(View.GONE);
 
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.parseColor("#3e4a59"));
         // Initialize a new spannable string builder instance
@@ -317,15 +329,72 @@ public class DeviceConfigDialog extends AppCompatDialogFragment implements TimeP
 
             }
         });
+        sSubCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String subConditionChoice;
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                subConditionChoice = sSubCondition.getSelectedItem().toString();
+                if(subConditionChoice.equals("Timer")){
+                    subTimerInput.setVisibility(View.VISIBLE);
+                    subTimerPicker.setVisibility(View.VISIBLE);
+                    subInputStart.setVisibility(View.GONE);
+                    subInputEnd.setVisibility(View.GONE);
+                    subTimerStart.setVisibility(View.GONE);
+                    subTimerEnd.setVisibility(View.GONE);
+                }else if(subConditionChoice.equals("Scheduled")){
+                    subTimerInput.setVisibility(View.GONE);
+                    subTimerPicker.setVisibility(View.GONE);
+                    subInputStart.setVisibility(View.VISIBLE);
+                    subInputEnd.setVisibility(View.VISIBLE);
+                    subTimerStart.setVisibility(View.VISIBLE);
+                    subTimerEnd.setVisibility(View.VISIBLE);
+                }else{
+                    subTimerInput.setVisibility(View.GONE);
+                    subTimerPicker.setVisibility(View.GONE);
+                    subInputStart.setVisibility(View.GONE);
+                    subInputEnd.setVisibility(View.GONE);
+                    subTimerStart.setVisibility(View.GONE);
+                    subTimerEnd.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         timerPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog timePicker = new TimePickerDialog(getContext(),3,DeviceConfigDialog.this,hour,minutes,true);
+                TimePickerDialog timePicker = new TimePickerDialog(getContext(), 3, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        hour = hourOfDay;
+                        minutes = minute;
+                        timerInput.setText(String.valueOf(hour)+" Hour "+String.valueOf(minutes)+" Minutes");
+                        timerInput.setEnabled(false);
+                    }
+                }, hour, minutes, true);
+                timePicker.show();
+
+            }
+        });
+        subTimerPicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePicker = new TimePickerDialog(getContext(), 3, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        hour = hourOfDay;
+                        minutes = minute;
+                        subTimerInput.setText(String.valueOf(hour)+" Hour "+String.valueOf(minutes)+" Minutes");
+                        subTimerInput.setEnabled(false);
+                    }
+                }, hour, minutes, true);
                 timePicker.show();
             }
         });
-
         final List<String> myAction = new ArrayList<String>();
         final ArrayAdapter<String> dataAdapterAction = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, myAction);
         dataAdapterAction.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -337,11 +406,13 @@ public class DeviceConfigDialog extends AppCompatDialogFragment implements TimeP
         return myDialog;
     }
 
-    @Override
+    /*@Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         hour = hourOfDay;
         minutes = minute;
         timerInput.setText(String.valueOf(hour)+" Hour "+String.valueOf(minutes)+" Minutes");
         timerInput.setEnabled(false);
-    }
+    }*/
+
+
 }
