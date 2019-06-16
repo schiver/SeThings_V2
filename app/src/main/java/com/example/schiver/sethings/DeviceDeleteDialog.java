@@ -24,8 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 public class DeviceDeleteDialog extends AppCompatDialogFragment {
     private String deviceID;
     private String roomName;
-    FirebaseDatabase myDb;
-    DatabaseReference dbRef;
+    private FirebaseDatabase myDb;
+    private DatabaseReference dbRef;
+    private FirebaseDatabase myDb2;
+    private DatabaseReference dbRef2;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 //Toast.makeText(getContext(), "Delete "+deviceID+"Room : "+roomName, Toast.LENGTH_SHORT).show();
                 deleteDevice(roomName,deviceID);
+                deleteConfig(roomName,deviceID);
             }
         });
 
@@ -86,5 +89,23 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
             }
         });
     }
+
+    public void deleteConfig(String room, final String devID){
+        myDb2 = FirebaseDatabase.getInstance();
+        dbRef2 = myDb2.getReference("SeThings-Config/"+roomName+"/");
+        dbRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef2.child(devID).removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
 }

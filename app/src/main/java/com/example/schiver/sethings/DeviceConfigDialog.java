@@ -26,6 +26,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.schiver.sethings.Model.ConfigDeviceData;
+import com.example.schiver.sethings.Model.ConfigDeviceDataCondition;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,8 +53,14 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
     private EditText timerInput,subTimerInput;
     private EditText inputStart, inputEnd, subInputStart, subInputEnd;
     private int hour,minutes;
-    FirebaseDatabase myDb;
-    DatabaseReference dbRef;
+    private FirebaseDatabase myDb;
+    private DatabaseReference dbRef;
+    private FirebaseDatabase myDb2;
+    private DatabaseReference dbRef2;
+    int valueNow = 0;
+    private String postCondition="#", postConditionDuration="#", postConditionStart="#", postConditionEnd="#";
+    private String postSubCondition="#", postSubConditionDuration="#", postSubConditionStart="#", postSubConditionEnd="#";
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -125,19 +132,23 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
 
                     }
                 }).setPositiveButton("Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Toast.makeText(getContext(), "ID to be connected "+SharedPref.readSharedPref(getContext(),"myConfigID",""), Toast.LENGTH_SHORT).show();
-                //deleteDevice(roomName,deviceID);
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        submitConfig(roomName,deviceID,SharedPref.readSharedPref(getContext(),"myConfigID",""),sAction.getSelectedItem().toString(),"Configured",deviceID,deviceName,deviceType,deviceIcon);
+                        getDetailConfig(roomName,deviceID);
+                        //Toast.makeText(getContext(), "Duration : "+deviceType, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Duration : "+String.valueOf(hour)+" "+String.valueOf(minutes), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "SubCondition : "+sSubCondition.getSelectedItem(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "ID to be connected "+SharedPref.readSharedPref(getContext(),"myConfigID",""), Toast.LENGTH_SHORT).show();
+                        //deleteDevice(roomName,deviceID);
+                    }
+                });
 
         sConditionValue.setMax(35);
         sensorValue.setText("0");
         labelName.setText(deviceName);
         mDeviceIcon.setImageResource(deviceIcon);
         sConditionValue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int valueNow = 0;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 valueNow = progress;
@@ -395,6 +406,115 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                 timePicker.show();
             }
         });
+        timerStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog startSchedule = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String hour_x,minutes_x;
+                        hour = hourOfDay;
+                        minutes = minute;
+                        if(hour < 10) {
+                            hour_x = "0"+hour;
+                        }else{
+                            hour_x = String.valueOf(hour);
+                        }
+
+                        if(minutes < 10) {
+                            minutes_x = "0"+minutes;
+                        }else{
+                            minutes_x = String.valueOf(minutes);
+                        }
+                        inputStart.setText(hour_x+":"+minutes_x);
+                        inputStart.setEnabled(false);
+                    }
+                },hour,minutes,true);
+                startSchedule.show();
+            }
+        });
+        timerEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog endSchedule = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String hour_x,minutes_x;
+                        hour = hourOfDay;
+                        minutes = minute;
+                        if(hour < 10) {
+                            hour_x = "0"+hour;
+                        }else{
+                            hour_x = String.valueOf(hour);
+                        }
+
+                        if(minutes < 10) {
+                            minutes_x = "0"+minutes;
+                        }else{
+                            minutes_x = String.valueOf(minutes);
+                        }
+                        inputEnd.setText(hour_x+":"+minutes_x);
+                        inputEnd.setEnabled(false);
+                    }
+                },hour,minutes,true);
+                endSchedule.show();
+            }
+        });
+        subTimerStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog startSchedule = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String hour_x,minutes_x;
+                        hour = hourOfDay;
+                        minutes = minute;
+                        if(hour < 10) {
+                            hour_x = "0"+hour;
+                        }else{
+                            hour_x = String.valueOf(hour);
+                        }
+
+                        if(minutes < 10) {
+                            minutes_x = "0"+minutes;
+                        }else{
+                            minutes_x = String.valueOf(minutes);
+                        }
+                        subInputStart.setText(hour_x+":"+minutes_x);
+                        subInputStart.setEnabled(false);
+                    }
+                },hour,minutes,true);
+                startSchedule.show();
+            }
+        });
+        subTimerEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog startSchedule = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String hour_x,minutes_x;
+                        hour = hourOfDay;
+                        minutes = minute;
+                        if(hour < 10) {
+                            hour_x = "0"+hour;
+                        }else{
+                            hour_x = String.valueOf(hour);
+                        }
+
+                        if(minutes < 10) {
+                            minutes_x = "0"+minutes;
+                        }else{
+                            minutes_x = String.valueOf(minutes);
+                        }
+                        subInputEnd.setText(hour_x+":"+minutes_x);
+                        subInputEnd.setEnabled(false);
+                    }
+                },hour,minutes,true);
+                startSchedule.show();
+            }
+        });
+
         final List<String> myAction = new ArrayList<String>();
         final ArrayAdapter<String> dataAdapterAction = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, myAction);
         dataAdapterAction.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -406,13 +526,111 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
         return myDialog;
     }
 
-    /*@Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        hour = hourOfDay;
-        minutes = minute;
-        timerInput.setText(String.valueOf(hour)+" Hour "+String.valueOf(minutes)+" Minutes");
-        timerInput.setEnabled(false);
-    }*/
+    public void submitConfig(String roomName, final String deviceID, String connectedDevice, String deviceAction, String deviceCondition, String deviceEvent, String deviceName, String deviceType, int deviceIcon){
+        // Grab all variable here
+
+        myDb = FirebaseDatabase.getInstance();
+        dbRef = myDb.getReference("SeThings-Config/"+roomName);
+        final ConfigDeviceData myConfig = new ConfigDeviceData(
+                deviceIcon,
+                deviceID,
+                deviceType,
+                deviceName,
+                deviceEvent,
+                deviceCondition,
+                connectedDevice,
+                deviceAction,
+                "#",
+                "#"
+        );
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef.child(deviceID).setValue(myConfig);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void submitDetailConfig(String roomName, String deviceID, String devCondition, String devConStart, String devConEnd, String devTimeDuration, String devSubCondition, String devSubConStart, String devSubConEnd, String devSubTimeDuration){
+        final String myID = deviceID;
+        myDb2 = FirebaseDatabase.getInstance();
+        dbRef2 = myDb2.getReference("SeThings-Detail_Config/"+roomName+"/");
+        final ConfigDeviceDataCondition myDetailCondition = new ConfigDeviceDataCondition(
+                                                                devCondition,
+                                                                devTimeDuration,
+                                                                devConStart,
+                                                                devConEnd,
+                                                                devSubCondition,
+                                                                devSubTimeDuration,
+                                                                devSubConStart,
+                                                                devSubConEnd);
+        //Toast.makeText(getContext(),"Condition : "+devCondition,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"Room Name : "+roomName,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"ID : "+myID,Toast.LENGTH_SHORT).show();
+        dbRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef2.child(myID).setValue(myDetailCondition);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getDetailConfig(String roomName,String deviceID){
+        String connectChoice = sConnected.getSelectedItem().toString();
+        if(connectChoice.equals("Temperature Sensor")){
+            postCondition = "SENSOR_TEMP_VAL_"+valueNow;
+        }else if(connectChoice.equals("Motion Sensor")){
+            postCondition = "SENSOR_MOTION_VAL_";
+        }else if(connectChoice.equals("None")){
+            postCondition = sCondition.getSelectedItem().toString().toUpperCase();
+        }else{
+            postCondition ="NO_CONDITION";
+        }
+
+        if(connectChoice.equals("Temperature Sensor") || connectChoice.equals("Motion Sensor") ){
+            // get Sub Condition
+            postSubCondition = sSubCondition.getSelectedItem().toString().toUpperCase();
+        }
+
+        if(postCondition.equals("TIMER")){
+            int secConversion = (hour*3600) + (minutes*60);
+            postConditionDuration = String.valueOf(secConversion);
+        }else if(postCondition.equals("SCHEDULED")){
+            postConditionStart = inputStart.getText().toString();
+            postConditionEnd = inputEnd.getText().toString();
+        }else{
+            postCondition = "NO_CONDITION";
+        }
+
+        if(postSubCondition.equals("TIMER")){
+            int setSubConversion = (hour*3600) + (minutes*60);
+            postSubConditionDuration = String.valueOf(setSubConversion);
+        }else if(postSubCondition.equals("SCHEDULED")){
+            postSubConditionStart = subInputStart.getText().toString();
+            postSubConditionEnd = subInputEnd.getText().toString();
+        }else{
+            postSubCondition = "NO_CONDITION";
+        }
+
+        if(postCondition.equals("NO_CONDITION") && postSubCondition.equals("NO_CONDITION")){
+            Toast.makeText(getContext(),"Please select atleast 1 condition",Toast.LENGTH_LONG).show();
+        }else{
+            submitDetailConfig(roomName,deviceID,postCondition,postConditionStart,postConditionEnd,postConditionDuration,postSubCondition,postSubConditionStart,postSubConditionEnd,postSubConditionDuration);
+        }
+
+        //Toast.makeText(getContext(),"Condition : "+postConditionDuration,Toast.LENGTH_LONG).show();
+    }
+
 
 
 }

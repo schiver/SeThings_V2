@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -100,7 +101,12 @@ public class ConfigActivity extends AppCompatActivity {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         ConfigDeviceData dataDevice = ds.getValue(ConfigDeviceData.class);
                         if(dataDevice.getDeviceCondition().equals("#")){
-                            devInfo="Not configure yet";
+                            if(dataDevice.getDeviceType().equals("Sensor")){
+                                devInfo="Installed";
+                            }else{
+                                devInfo="Not configure yet";
+                            }
+
                         }else{
                             devInfo = dataDevice.getDeviceCondition();
                         }
@@ -129,5 +135,11 @@ public class ConfigActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dot_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.schiver.sethings.Model.ConfigDeviceData;
+import com.example.schiver.sethings.Model.ConfigDeviceDataCondition;
 import com.example.schiver.sethings.Model.DeviceListData;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
@@ -32,10 +33,12 @@ import java.util.List;
 public class DeviceEditDialog extends AppCompatDialogFragment {
     private EditText inputDeviceID;
     private Spinner optionType,optionName;
-    FirebaseDatabase myDb;
-    DatabaseReference dbRef;
-    FirebaseDatabase myDb2;
-    DatabaseReference dbRef2;
+    private FirebaseDatabase myDb;
+    private DatabaseReference dbRef;
+    private FirebaseDatabase myDb2;
+    private DatabaseReference dbRef2;
+    private FirebaseDatabase myDb3;
+    private DatabaseReference dbRef3;
     private String deviceID;
     private String roomName;
     private int iconName;
@@ -182,6 +185,7 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
                                 optionType.getSelectedItem().toString(),
                                 optionName.getSelectedItem().toString()
                         );
+                        addDetailConfig(roomName,inputDeviceID.getText().toString());
                     }
         });
         final AlertDialog myDialog = builder.create();
@@ -230,6 +234,32 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbRef2.child(myConfig.getDeviceID()).setValue(myConfig);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void addDetailConfig(String room, final String deviceId){
+        myDb3  = FirebaseDatabase.getInstance();
+        dbRef3 = myDb2.getReference("SeThings-Detail_Config/"+room+"/");
+        final ConfigDeviceDataCondition detailCondition = new ConfigDeviceDataCondition(
+                "#",
+                "#",
+                "#",
+                "#",
+                "#",
+                "#",
+                "#",
+                "#"
+        );
+        dbRef3.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef3.child(deviceId).setValue(detailCondition);
             }
 
             @Override
