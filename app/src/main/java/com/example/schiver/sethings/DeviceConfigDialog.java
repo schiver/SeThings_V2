@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -50,6 +51,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
     private ImageView mDeviceIcon;
     private Button timerPicker,timerStart,timerEnd, subTimerPicker, subTimerStart, subTimerEnd;
     private RadioGroup radioOption;
+    private RadioButton radioChoice;
     private EditText timerInput,subTimerInput;
     private EditText inputStart, inputEnd, subInputStart, subInputEnd;
     private int hour,minutes;
@@ -65,7 +67,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_add_config,null);
+        final View view = inflater.inflate(R.layout.dialog_add_config,null);
 
         // get arguments
         final String roomName = SharedPref.readSharedPref(getContext(),"Room","");
@@ -135,7 +137,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         submitConfig(roomName,deviceID,SharedPref.readSharedPref(getContext(),"myConfigID",""),sAction.getSelectedItem().toString(),"Configured",deviceID,deviceName,deviceType,deviceIcon);
-                        getDetailConfig(roomName,deviceID);
+                        getDetailConfig(view,roomName,deviceID);
                         //Toast.makeText(getContext(), "Duration : "+deviceType, Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getContext(), "Duration : "+String.valueOf(hour)+" "+String.valueOf(minutes), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getContext(), "SubCondition : "+sSubCondition.getSelectedItem(), Toast.LENGTH_SHORT).show();
@@ -585,16 +587,16 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
         });
     }
 
-    public void getDetailConfig(String roomName,String deviceID){
+    public void getDetailConfig(final View view, String roomName, String deviceID){
         String connectChoice = sConnected.getSelectedItem().toString();
         if(connectChoice.equals("Temperature Sensor")){
             postCondition = "SENSOR_TEMP_VAL_"+valueNow;
         }else if(connectChoice.equals("Motion Sensor")){
-            postCondition = "SENSOR_MOTION_VAL_";
-        }else if(connectChoice.equals("None")){
+            int selectedChoice = radioOption.getCheckedRadioButtonId();
+            radioChoice = view.findViewById(selectedChoice);
+            postCondition = "SENSOR_MOTION_VAL_"+radioChoice.getText().toString().toUpperCase();
+        }else if(connectChoice.equals("None")) {
             postCondition = sCondition.getSelectedItem().toString().toUpperCase();
-        }else{
-            postCondition ="NO_CONDITION";
         }
 
         if(connectChoice.equals("Temperature Sensor") || connectChoice.equals("Motion Sensor") ){
@@ -608,8 +610,6 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
         }else if(postCondition.equals("SCHEDULED")){
             postConditionStart = inputStart.getText().toString();
             postConditionEnd = inputEnd.getText().toString();
-        }else{
-            postCondition = "NO_CONDITION";
         }
 
         if(postSubCondition.equals("TIMER")){
