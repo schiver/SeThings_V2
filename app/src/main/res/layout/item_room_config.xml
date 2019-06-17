@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/input_room_name"
+            android:id="@+id/room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/installed_device"
+            android:id="@+id/usage_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -34,12 +34,12 @@
             android:text="5"
             android:textColor="@color/colorMainApp"
             android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView12"
+            app:layout_constraintEnd_toStartOf="@+id/label_kwh"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_room_name" />
+            app:layout_constraintTop_toBottomOf="@+id/room_name" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/label_kwh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -48,7 +48,7 @@
             android:textColor="@color/colorMainAppFont"
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/switch1"
-            app:layout_constraintTop_toBottomOf="@+id/input_room_name" />
+            app:layout_constraintTop_toBottomOf="@+id/room_name" />
 
         <TextView
             android:id="@+id/textView13"

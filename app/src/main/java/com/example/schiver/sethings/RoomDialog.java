@@ -3,7 +3,6 @@ package com.example.schiver.sethings;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,9 +12,7 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.example.schiver.sethings.Model.RoomListData;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +31,7 @@ public class RoomDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_room,null);
-        inputRoomName = view.findViewById(R.id.input_room_name);
+        inputRoomName = view.findViewById(R.id.room_name);
 
 
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.parseColor("#3e4a59"));

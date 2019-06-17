@@ -21,8 +21,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         public DashboardViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTextViewRoom = itemView.findViewById(R.id.input_room_name);
-            mTextViewDevice = itemView.findViewById(R.id.installed_device);
+            mTextViewRoom = itemView.findViewById(R.id.room_name);
+            mTextViewDevice = itemView.findViewById(R.id.usage_view);
             mTextViewUsage = itemView.findViewById(R.id.usage_percentage);
         }
     }

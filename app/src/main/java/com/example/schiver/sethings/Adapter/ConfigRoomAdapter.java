@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.schiver.sethings.ConfigActivity;
-import com.example.schiver.sethings.DeviceListActivity;
 import com.example.schiver.sethings.Model.RoomAdapterData;
 import com.example.schiver.sethings.R;
 import com.example.schiver.sethings.Utils.SharedPref;
@@ -29,8 +28,8 @@ public class ConfigRoomAdapter extends RecyclerView.Adapter<ConfigRoomAdapter.Co
 
         public ConfigRoomViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTextViewRoom = itemView.findViewById(R.id.input_room_name);
-            mTextViewInstalledDevice = itemView.findViewById(R.id.installed_device);
+            mTextViewRoom = itemView.findViewById(R.id.room_name);
+            mTextViewInstalledDevice = itemView.findViewById(R.id.usage_view);
             mRoomCardView = itemView.findViewById(R.id.cardHolder);
         }
     }
@@ -57,7 +56,7 @@ public class ConfigRoomAdapter extends RecyclerView.Adapter<ConfigRoomAdapter.Co
             @Override
             public void onClick(View v) {
                 Intent testIntent = new Intent(myContext,ConfigActivity.class);
-                SharedPref.saveSharefPref(myContext,"ConfigRoom",currentItem.getRoomName());
+                SharedPref.saveSharefPref(myContext,"Room",currentItem.getRoomName());
                 myContext.startActivity(testIntent);
             }
         });

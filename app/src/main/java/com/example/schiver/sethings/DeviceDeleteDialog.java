@@ -28,6 +28,10 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
     private DatabaseReference dbRef;
     private FirebaseDatabase myDb2;
     private DatabaseReference dbRef2;
+    private FirebaseDatabase myDb3;
+    private DatabaseReference dbRef3;
+    private FirebaseDatabase myDb4;
+    private DatabaseReference dbRef4;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -60,6 +64,8 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
                 //Toast.makeText(getContext(), "Delete "+deviceID+"Room : "+roomName, Toast.LENGTH_SHORT).show();
                 deleteDevice(roomName,deviceID);
                 deleteConfig(roomName,deviceID);
+                deleteDetailConfig(roomName,deviceID);
+                deleteUsage(roomName,deviceID);
             }
         });
 
@@ -97,6 +103,37 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbRef2.child(devID).removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void deleteDetailConfig(String room, final String devID){
+        myDb3 = FirebaseDatabase.getInstance();
+        dbRef3 = myDb3.getReference("SeThings-Detail_Config/"+roomName+"/");
+        dbRef3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef3.child(devID).removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void deleteUsage(String room, final String devID){
+        myDb4 = FirebaseDatabase.getInstance();
+        dbRef4 = myDb3.getReference("SeThings-Device_Usage/"+roomName+"/");
+        dbRef4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef4.child(devID).removeValue();
             }
 
             @Override

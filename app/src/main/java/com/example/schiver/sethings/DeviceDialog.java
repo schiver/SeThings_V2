@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.ConfigDeviceDataCondition;
 import com.example.schiver.sethings.Model.DeviceListData;
+import com.example.schiver.sethings.Model.DeviceUsageData;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +40,8 @@ public class DeviceDialog extends AppCompatDialogFragment {
     private DatabaseReference dbRef2;
     private FirebaseDatabase myDb3;
     private DatabaseReference dbRef3;
+    private FirebaseDatabase myDb4;
+    private DatabaseReference dbRef4;
     private int iconName;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -233,11 +236,33 @@ public class DeviceDialog extends AppCompatDialogFragment {
 
             }
         });
+
+        myDb4 = FirebaseDatabase.getInstance();
+        dbRef4 = myDb4.getReference("SeThings-Device_Usage/"+room+"/");
+        final DeviceUsageData myUsageData = new DeviceUsageData(
+                iconName,
+                deviceId,
+                deviceType,
+                deviceName,
+                deviceInfo,
+                0
+        );
+        dbRef4.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef4.child(myUsageData.getDeviceID()).setValue(myUsageData);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void addDetailConfig(String room, final String deviceId){
         myDb3  = FirebaseDatabase.getInstance();
-        dbRef3 = myDb2.getReference("SeThings-Detail_Config/"+room+"/");
+        dbRef3 = myDb3.getReference("SeThings-Detail_Config/"+room+"/");
         final ConfigDeviceDataCondition detailCondition = new ConfigDeviceDataCondition(
                 "#",
                 "#",
@@ -259,7 +284,13 @@ public class DeviceDialog extends AppCompatDialogFragment {
 
             }
         });
+
+
+
+
     }
+
+
 
 
 }

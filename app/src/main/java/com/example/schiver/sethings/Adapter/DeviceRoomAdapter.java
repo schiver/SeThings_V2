@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.schiver.sethings.DeviceListActivity;
 import com.example.schiver.sethings.Model.RoomAdapterData;
 import com.example.schiver.sethings.R;
-import com.example.schiver.sethings.SuccessSignupActivity;
 import com.example.schiver.sethings.Utils.SharedPref;
 
 import java.util.ArrayList;
@@ -28,8 +27,8 @@ public class DeviceRoomAdapter extends RecyclerView.Adapter<DeviceRoomAdapter.De
         public CardView mRoomCardView;
         public DeviceRoomViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTextViewRoom = itemView.findViewById(R.id.input_room_name);
-            mTextViewInstalledDevice = itemView.findViewById(R.id.installed_device);
+            mTextViewRoom = itemView.findViewById(R.id.room_name);
+            mTextViewInstalledDevice = itemView.findViewById(R.id.usage_view);
             mRoomCardView = itemView.findViewById(R.id.cardHolder);
         }
     }

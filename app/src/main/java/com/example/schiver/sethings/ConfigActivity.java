@@ -66,7 +66,7 @@ public class ConfigActivity extends AppCompatActivity {
             }
         });
         // Get Shared pref roomName
-        roomName = SharedPref.readSharedPref(getApplicationContext(),"ConfigRoom","");
+        roomName = SharedPref.readSharedPref(getApplicationContext(),"Room","");
         TextView mTextViewRoomName = (TextView) findViewById(R.id.labelRoomName);
         mTextViewRoomName.setText(roomName);
 
