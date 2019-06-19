@@ -12,23 +12,13 @@
         android:layout_height="match_parent"
         >
 
-        <Switch
-            android:id="@+id/switch_config"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:theme="@style/SCBSwitch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/menuLink" />
-
         <TextView
-            android:id="@+id/device_id"
+            android:id="@+id/device_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Device_id"
+            android:text="Device_name"
             android:textColor="@color/colorMainAppFont2"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/device_icon"
@@ -37,37 +27,14 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/menuLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:text="More"
-            android:textColor="@color/colorMainAppDark"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/device_name"
+            android:id="@+id/device_usage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="Device_name"
+            android:text="Device_usage"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="15sp"
-            app:layout_constraintStart_toEndOf="@+id/device_icon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/device_information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="56dp"
-            android:text="Device information"
-            android:textSize="13sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/device_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,5 +49,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars[0]" />
+
+        <ProgressBar
+            android:id="@+id/usage_percentage"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/device_icon" />
+
+        <TextView
+            android:id="@+id/view_usage_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="10%"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

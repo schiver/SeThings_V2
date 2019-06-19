@@ -16,11 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schiver.sethings.DeviceConfigDialog;
-import com.example.schiver.sethings.DeviceEditDialog;
 import com.example.schiver.sethings.Model.ConfigDeviceAdapterData;
 import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.ConfigDeviceDataCondition;
-import com.example.schiver.sethings.Model.DeviceAdapterData;
 import com.example.schiver.sethings.R;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;

@@ -86,8 +86,9 @@ public class HomeFragment extends Fragment {
                     allInstalled+=Integer.parseInt(myArrayInstalledDevice.get(a));
                 }
                 for(int index = 0; index < myArrayRoom.size(); index++){
-                    float percentage = (float) Math.ceil((float)Float.parseFloat(myArrayData.get(index)) / allUsage * 100) ;
-                    dashboardDataList.add(new DashboardData(myArrayRoom.get(index),String.valueOf(percentage), myArrayInstalledDevice.get(index)));
+                    float data = Float.parseFloat(myArrayData.get(index)) / allUsage * 100;
+                    float percentage = (float) Math.floor(data*100)/100 ;
+                    dashboardDataList.add(new DashboardData(myArrayRoom.get(index),String.valueOf(percentage)+"%", myArrayInstalledDevice.get(index)));
                 }
 
                 //Toast.makeText(getContext(),"Total Usage"+String.valueOf(allInstalled),Toast.LENGTH_SHORT).show();

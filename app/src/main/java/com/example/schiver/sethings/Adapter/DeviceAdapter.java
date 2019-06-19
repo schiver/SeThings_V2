@@ -14,10 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.schiver.sethings.DeviceDeleteDialog;
-import com.example.schiver.sethings.DeviceDialog;
 import com.example.schiver.sethings.DeviceEditDialog;
 import com.example.schiver.sethings.Model.DeviceAdapterData;
 import com.example.schiver.sethings.R;
