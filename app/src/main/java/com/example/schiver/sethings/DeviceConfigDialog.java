@@ -59,6 +59,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
     private DatabaseReference dbRef;
     private FirebaseDatabase myDb2;
     private DatabaseReference dbRef2;
+    private TextView labelCondition;
     int valueNow = 0;
     private String postCondition="#", postConditionDuration="#", postConditionStart="#", postConditionEnd="#";
     private String postSubCondition="#", postSubConditionDuration="#", postSubConditionStart="#", postSubConditionEnd="#";
@@ -76,6 +77,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
         deviceType = getArguments().getString("devType");
         deviceIcon = getArguments().getInt("devIcon");
 
+        labelCondition = view.findViewById(R.id.textView6);
         sConnected = view.findViewById(R.id.spinner_connected);
         sCondition = view.findViewById(R.id.spinner_condition);
         sSubCondition = view.findViewById(R.id.spinner_sub_condition);
@@ -220,6 +222,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                 String choice = listID.get(position);
                 String otherChoice = sConnected.getSelectedItem().toString();
                 if(choice.equals("#") || choice.equals("*")){
+                    labelCondition.setText("Condition");
                     sCondition.setVisibility(View.VISIBLE);
                     sConditionValue.setVisibility(View.INVISIBLE);
                     sensorValue.setVisibility(View.INVISIBLE);
@@ -232,6 +235,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                     timerPicker.setVisibility(View.GONE);
                 }else{
                     if(otherChoice.equals("Temperature Sensor")){
+                        labelCondition.setText("Set temperature");
                         timerInput.setVisibility(View.GONE);
                         timerPicker.setVisibility(View.GONE);
                         sCondition.setVisibility(View.INVISIBLE);
@@ -251,6 +255,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                         dataAdapterSubCondition.notifyDataSetChanged();
                         sSubCondition.setAdapter(dataAdapterSubCondition);
                     }else{
+                        labelCondition.setText("Motion detected");
                         timerInput.setVisibility(View.GONE);
                         timerPicker.setVisibility(View.GONE);
                         radioOption.setVisibility(View.VISIBLE);

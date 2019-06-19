@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schiver.sethings.Adapter.DashboardAdapter;
@@ -29,31 +31,23 @@ public class HomeFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseDatabase myDb;
     private DatabaseReference dbRef;
-    /*private float usageRoom,allUsage;
-    private ArrayList<Float> myArrayUsage = new ArrayList<>();
-    private ArrayList<String> myArrayRoom = new ArrayList<>();
-    private ArrayList<String> myArrayData = new ArrayList<>();
-    private ArrayList<String> myArrayInstalledDevice = new ArrayList<>();*/
+    private ProgressBar loadingBar;
+    private TextView infoTotalUsage,infoInstalled;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_home,container,false);
-
-        /*dashboardDataList.add(new DashboardData("Living Room","20%", "15"));
-        dashboardDataList.add(new DashboardData("Bedroom 1","50%", "5"));
-        dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));
-        dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));
-        dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));
-        dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));
-        dashboardDataList.add(new DashboardData("Bedroom 2","10%", "5"));*/
-
+        loadingBar = rootView.findViewById(R.id.progressBar);
         mRecyclerView = rootView.findViewById(R.id.dashboad_recycler);
+        infoTotalUsage = rootView.findViewById(R.id.label_total_usage);
+        infoInstalled = rootView.findViewById(R.id.label_total_device);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity() , LinearLayoutManager.VERTICAL, false);
 
 
         return rootView;
     }
+
 
     @Override
     public void onResume() {
@@ -62,11 +56,13 @@ public class HomeFragment extends Fragment {
         final ArrayList<String> myArrayData = new ArrayList<>();
         final ArrayList<String> myArrayInstalledDevice = new ArrayList<>();
         final ArrayList<DashboardData> dashboardDataList = new ArrayList<>();
+        loadingBar.setVisibility(View.VISIBLE);
         myDb = FirebaseDatabase.getInstance();
         dbRef = myDb.getReference("SeThings-Device_Usage");
         dbRef.addValueEventListener(new ValueEventListener() {
             int i =0;
             float usageRoom,allUsage;
+            int allInstalled;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
@@ -83,19 +79,26 @@ public class HomeFragment extends Fragment {
                     //dashboardDataList.add(new DashboardData(ds.getKey(),String.valueOf(usageRoom)+"/"+String.valueOf(allUsage), String.valueOf(i)));
                     usageRoom = 0;
                     i=0;
+
                 }
                 for(int a=0; a<myArrayUsage.size(); a++){
                     allUsage+=myArrayUsage.get(a);
+                    allInstalled+=Integer.parseInt(myArrayInstalledDevice.get(a));
                 }
                 for(int index = 0; index < myArrayRoom.size(); index++){
                     float percentage = (float) Math.ceil((float)Float.parseFloat(myArrayData.get(index)) / allUsage * 100) ;
                     dashboardDataList.add(new DashboardData(myArrayRoom.get(index),String.valueOf(percentage), myArrayInstalledDevice.get(index)));
                 }
-                Toast.makeText(getContext(),"Total Usage"+String.valueOf(allUsage),Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(getContext(),"Total Usage"+String.valueOf(allInstalled),Toast.LENGTH_SHORT).show();
                 mAdapter = new DashboardAdapter(dashboardDataList);
                 mAdapter.notifyDataSetChanged();
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setAdapter(mAdapter);
+                infoTotalUsage.setText(String.valueOf(Math.ceil(allUsage)).replaceAll(".0*$", " "));
+                //infoTotalUsage.setTextSize(12f);
+                infoInstalled.setText(String.valueOf(allInstalled));
+                loadingBar.setVisibility(View.GONE);
             }
 
             @Override

@@ -70,6 +70,7 @@ public class UsageFragment extends Fragment {
 
     @Override
     public void onResume() {
+        usageGraph.setVisibility(View.GONE);
         super.onResume();
         myDb = FirebaseDatabase.getInstance();
         dbRef = myDb.getReference("SeThings-Device_Usage");
@@ -108,7 +109,7 @@ public class UsageFragment extends Fragment {
                 usageGraph.setData(data);
                 usageGraph.notifyDataSetChanged();
                 usageGraph.invalidate();
-
+                usageGraph.setVisibility(View.VISIBLE);
 
             }
 
