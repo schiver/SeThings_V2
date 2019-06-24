@@ -82,11 +82,11 @@ public class UsageDetailActivity extends AppCompatActivity {
                     DeviceUsageData myData = ds.getValue(DeviceUsageData.class);
                     float dataPercentUsage = 100*myData.getTotalUsage()/roomUsage;
                     int progressPercentage = (int) Math.floor(dataPercentUsage*100)/100;
-                    if(progressPercentage < 25){
+                    if(progressPercentage <= 25){
                         colorProgress = rgb(29, 209, 161);
-                    }else if(progressPercentage > 25 && progressPercentage < 60){
+                    }else if(progressPercentage > 25 && progressPercentage <= 60){
                         colorProgress = rgb(254, 202, 87);
-                    }else{
+                    }else if(progressPercentage >= 60){
                         colorProgress = rgb(255, 107, 107);
                     }
                     deviceUsageList.add(

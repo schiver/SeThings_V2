@@ -88,11 +88,11 @@ public class HomeFragment extends Fragment {
                 for(int index = 0; index < myArrayRoom.size(); index++){
                     float data = Float.parseFloat(myArrayData.get(index)) / allUsage * 100;
                     float percentage = (float) Math.floor(data*100)/100 ;
-                    dashboardDataList.add(new DashboardData(myArrayRoom.get(index),String.valueOf(percentage)+"%", myArrayInstalledDevice.get(index)));
+                    dashboardDataList.add(new DashboardData(myArrayRoom.get(index),String.valueOf(percentage)+"%", myArrayInstalledDevice.get(index),Float.parseFloat(myArrayData.get(index))));
                 }
 
                 //Toast.makeText(getContext(),"Total Usage"+String.valueOf(allInstalled),Toast.LENGTH_SHORT).show();
-                mAdapter = new DashboardAdapter(dashboardDataList);
+                mAdapter = new DashboardAdapter(dashboardDataList,getContext());
                 mAdapter.notifyDataSetChanged();
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setAdapter(mAdapter);

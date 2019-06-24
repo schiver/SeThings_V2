@@ -35,7 +35,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/colorMainAppDark"
+        android:backgroundTint="@color/colorMainAppLight"
         android:src="@drawable/ic_plus"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

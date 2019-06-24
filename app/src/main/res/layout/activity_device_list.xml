@@ -41,7 +41,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/colorMainAppDark"
+        android:backgroundTint="@color/colorMainAppLight"
         android:src="@drawable/ic_plus"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="Room Name"
-            android:textColor="@color/colorMainAppDark"
+            android:textColor="@color/colorMainApp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

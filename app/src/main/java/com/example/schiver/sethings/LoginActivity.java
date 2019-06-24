@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         myColoredTextView = (TextView) findViewById(R.id.sign_upText);
         String name = getColoredSpanned("New user?", "#3e4a59");
-        String surName = getColoredSpanned("SignUp Here","#3836BD");
+        String surName = getColoredSpanned("SignUp Here","#005AAC");
         myColoredTextView.setText(Html.fromHtml(name+" "+surName));
 
         inputUsername = (EditText) findViewById(R.id.username);
@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         timer.cancel();
                         myLayout.setAlpha(1);
-                        progressBar.setVisibility(View.GONE);
                         inputUsername.setFocusableInTouchMode(true);
                         inputPassword.setFocusableInTouchMode(true);
                     }
@@ -128,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                         // Account not registered
                         inputUsername.setError("Account not registered yet");
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 @Override

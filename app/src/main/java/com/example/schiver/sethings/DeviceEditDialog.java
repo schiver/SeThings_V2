@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.ConfigDeviceDataCondition;
 import com.example.schiver.sethings.Model.DeviceListData;
+import com.example.schiver.sethings.Model.DeviceUsageData;
 import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +40,8 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
     private DatabaseReference dbRef2;
     private FirebaseDatabase myDb3;
     private DatabaseReference dbRef3;
+    private FirebaseDatabase myDb4;
+    private DatabaseReference dbRef4;
     private String deviceID;
     private String roomName;
     private int iconName;
@@ -234,6 +237,28 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dbRef2.child(myConfig.getDeviceID()).setValue(myConfig);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        myDb4 = FirebaseDatabase.getInstance();
+        dbRef4 = myDb4.getReference("SeThings-Device_Usage/"+room+"/");
+        final DeviceUsageData myUsageData = new DeviceUsageData(
+                iconName,
+                deviceId,
+                deviceType,
+                deviceName,
+                deviceInfo,
+                0
+        );
+        dbRef4.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef4.child(myUsageData.getDeviceID()).setValue(myUsageData);
             }
 
             @Override

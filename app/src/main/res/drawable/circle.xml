@@ -3,7 +3,7 @@
     android:shape="ring"
     android:thicknessRatio="2.0"
     android:useLevel="false" >
-    <solid android:color="@color/colorMainAppDark" />
+    <solid android:color="@color/colorMainApp" />
 
 
 </shape>
