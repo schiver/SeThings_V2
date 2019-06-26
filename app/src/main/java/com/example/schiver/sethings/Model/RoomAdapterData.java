@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class RoomAdapterData {
     private String roomName , installerdDevice;
+    boolean switchValue;
 
-    public RoomAdapterData(ArrayList<RoomAdapterData> roomDataList){
-
+    public RoomAdapterData() {
     }
 
     public RoomAdapterData(String roomName, String installerdDevice) {
@@ -20,5 +20,9 @@ public class RoomAdapterData {
 
     public String getInstallerdDevice() {
         return installerdDevice;
+    }
+
+    public boolean isSwitchValue() {
+        return switchValue;
     }
 }

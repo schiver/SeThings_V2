@@ -52,9 +52,11 @@ public class DeviceListActivity extends AppCompatActivity {
         label2 = findViewById(R.id.label2);
         logo = findViewById(R.id.logo);
 
-        logo.setVisibility(View.GONE);
-        label1.setVisibility(View.GONE);
-        label2.setVisibility(View.GONE);
+        /*mRecyclerView.setVisibility(View.VISIBLE);
+        mainFrame.setBackgroundColor(Color.parseColor("#ffffff"));
+        logo.setVisibility(View.VISIBLE);
+        label1.setVisibility(View.VISIBLE);
+        label2.setVisibility(View.VISIBLE);*/
 
         // Setting toolbar
         mytoolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -102,13 +104,14 @@ public class DeviceListActivity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(!dataSnapshot.exists()) {
+                    int totalChild = (int) dataSnapshot.getChildrenCount();
+                    if(totalChild == 0) {
                         mRecyclerView.setVisibility(View.GONE);
                         mainFrame.setBackgroundColor(Color.parseColor("#ffffff"));
                         logo.setVisibility(View.VISIBLE);
                         label1.setVisibility(View.VISIBLE);
                         label2.setVisibility(View.VISIBLE);
-                    }else{
+                    }else {
                         // Load data here if data exist
                         deviceDataList.clear();
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -134,7 +137,7 @@ public class DeviceListActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(DeviceListActivity.this,"OKE",Toast.LENGTH_SHORT);
             }
         });
     }

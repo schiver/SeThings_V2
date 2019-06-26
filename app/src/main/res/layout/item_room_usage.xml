@@ -59,8 +59,9 @@
             android:layout_marginBottom="16dp"
             android:background="@color/screenBgWhite"
             android:text="Check"
-            android:textColor="@color/colorMainAppDark"
-            android:textSize="10sp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorMainApp"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

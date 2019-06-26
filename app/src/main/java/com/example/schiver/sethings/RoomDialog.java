@@ -25,7 +25,8 @@ public class RoomDialog extends AppCompatDialogFragment {
     private EditText inputRoomName;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
-
+    FirebaseDatabase myDb2;
+    DatabaseReference dbRef2;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -72,7 +73,7 @@ public class RoomDialog extends AppCompatDialogFragment {
         return myDialog;
     }
 
-    public void submitRoomData(String roomName){
+    public void submitRoomData(final String roomName){
         myDb = FirebaseDatabase.getInstance();
         dbRef = myDb.getReference("SeThings-Room");
 
@@ -83,6 +84,19 @@ public class RoomDialog extends AppCompatDialogFragment {
                 dbRef.child(roomData.getRoomName()).setValue(roomData);
                 //Intent intent = getActivity().getIntent();
                 //startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        myDb2 = FirebaseDatabase.getInstance();
+        dbRef2 = myDb2.getReference("SeThings-Device2/");
+        dbRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef2.child(roomData.getRoomName()).setValue("");
             }
 
             @Override

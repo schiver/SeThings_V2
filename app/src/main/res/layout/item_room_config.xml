@@ -20,7 +20,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Room Name"
-            android:textColor="@color/colorMainAppFont2"
+            android:textColor="@color/colorMainAppFont"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +29,7 @@
             android:id="@+id/usage_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="8dp"
             android:text="5"
@@ -46,7 +47,7 @@
             android:layout_marginEnd="164dp"
             android:text="Installed device"
             android:textColor="@color/colorMainAppFont"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toStartOf="@+id/switch1"
             app:layout_constraintTop_toBottomOf="@+id/room_name" />
 
@@ -58,7 +59,7 @@
             android:layout_marginEnd="8dp"
             android:text="View Device"
             android:textColor="@color/colorMainApp"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

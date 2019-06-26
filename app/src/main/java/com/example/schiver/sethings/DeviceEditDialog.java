@@ -69,7 +69,7 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
         List<String> list = new ArrayList<String>();
         list.add("Select option below");
         list.add("Sensor");
-        list.add("Ouput");
+        list.add("Output");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataAdapter.notifyDataSetChanged();
@@ -104,9 +104,12 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
                         list2.add("Lamp");
                         list2.add("Fan");
                         list2.add("Air Conditioner");
-                        list2.add("PC / Laptop");
-                        list2.add("Screen / Television");
-                        list2.add("AC Remote");
+                        list2.add("PC");
+                        list2.add("Monitor");
+                        list2.add("Laptop");
+                        list2.add("Television");
+                        list2.add("Rice Cooker");
+                        list2.add("Refrigerator");
                         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, list2);
                         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         dataAdapter2.notifyDataSetChanged();
@@ -131,7 +134,7 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
                         iconName = R.drawable.ic_motion_sensor;
                         break;
                     case "Temperature Sensor" :
-                        iconName = R.drawable.ic_temp;
+                        iconName = R.drawable.ic_temp_sensor;
                         break;
                     case "Lamp" :
                         iconName = R.drawable.ic_lamp;
@@ -140,16 +143,25 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
                         iconName = R.drawable.ic_fan;
                         break;
                     case "Air Conditioner" :
-                        iconName = R.drawable.ic_air_conditioner;
+                        iconName = R.drawable.ic_ac;
                         break;
-                    case "PC / Laptop" :
+                    case "PC" :
+                        iconName = R.drawable.ic_computer;
+                        break;
+                    case "Monitor" :
+                        iconName = R.drawable.ic_monitor;
+                        break;
+                    case "Laptop" :
                         iconName = R.drawable.ic_laptop;
                         break;
-                    case "Screen / Television" :
-                        iconName = R.drawable.ic_screen;
+                    case "Television" :
+                        iconName = R.drawable.ic_tv;
                         break;
-                    case "AC Remote" :
-                        iconName = R.drawable.ic_remote;
+                    case "Rice Cooker" :
+                        iconName = R.drawable.ic_rice_cooker;
+                        break;
+                    case "Refrigerator" :
+                        iconName = R.drawable.ic_refrigerator;
                         break;
                     default:
                         iconName = 0;

@@ -140,6 +140,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                     public void onClick(DialogInterface dialog, int which) {
                         submitConfig(roomName,deviceID,SharedPref.readSharedPref(getContext(),"myConfigID",""),sAction.getSelectedItem().toString(),"Configured",deviceID,deviceName,deviceType,deviceIcon);
                         getDetailConfig(view,roomName,deviceID);
+                        SharedPref.saveSharefPref(getContext(),roomName,"true");
                         //Toast.makeText(getContext(), "Duration : "+deviceType, Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getContext(), "Duration : "+String.valueOf(hour)+" "+String.valueOf(minutes), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getContext(), "SubCondition : "+sSubCondition.getSelectedItem(), Toast.LENGTH_SHORT).show();

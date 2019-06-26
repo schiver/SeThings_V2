@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schiver.sethings.Utils.SharedPref;
@@ -19,12 +20,15 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mytoolbar;
     Button logout;
     boolean session;
+    TextView labelMenu1,labelGreet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mytoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
+        labelMenu1 = findViewById(R.id.labelRoomName);
+        labelGreet = findViewById(R.id.textView5);
         // logout = (Button) findViewById(R.id.button);
         /*logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,18 +85,28 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()){
                 case R.id.nav_home :
                     selectedFragment = new HomeFragment();
+                    labelMenu1.setText("Helo User");
+                    labelGreet.setText("Welcome home");
                     break;
                 case R.id.nav_devices :
                     selectedFragment = new DevicesFragment();
+                    labelMenu1.setText("Devices");
+                    labelGreet.setText("Create your room and set your device");
                     break;
                 case R.id.nav_config :
                     selectedFragment = new ConfigFragment();
+                    labelMenu1.setText("Device Configuration");
+                    labelGreet.setText("Set up your device below");
                     break;
                 case R.id.nav_usage :
                     selectedFragment = new UsageFragment();
+                    labelMenu1.setText("Consumable Energy");
+                    labelGreet.setText("See your device configuration");
                     break;
                 case R.id.nav_help :
                     selectedFragment = new HelpFragment();
+                    labelMenu1.setText("Help");
+                    labelGreet.setText("See our faq about SeThings");
                     break;
 
             }

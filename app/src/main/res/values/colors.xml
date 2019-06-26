@@ -10,6 +10,6 @@
     <color name="colorMainAppFont2">#222F3E</color>
     <color name="colorGrayDot">#CCDEEE</color>
     <color name="colorMainWhite">#FFFFFF</color>
-    <color name="screenBgWhite">#F3F4F8</color>
+    <color name="screenBgWhite">#f5f6fa</color>
     <color name="colorMainAppDarkPressed">#000e8c</color>
 </resources>

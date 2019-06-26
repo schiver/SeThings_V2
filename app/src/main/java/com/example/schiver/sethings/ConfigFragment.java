@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.example.schiver.sethings.Adapter.ConfigRoomAdapter;
 import com.example.schiver.sethings.Adapter.DeviceRoomAdapter;
+import com.example.schiver.sethings.Model.ConfigDeviceData;
 import com.example.schiver.sethings.Model.RoomAdapterData;
 import com.example.schiver.sethings.Model.RoomListData;
 import com.google.firebase.database.DataSnapshot;
@@ -57,17 +58,25 @@ public class ConfigFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        super.onResume();
         loadingBar.setVisibility(View.VISIBLE);
         myDb = FirebaseDatabase.getInstance();
         myDb2 = FirebaseDatabase.getInstance();
-        dbRef = myDb.getReference("SeThings-Device2");
+        dbRef = myDb.getReference("SeThings-Config");
         dbRef.addValueEventListener(new ValueEventListener() {
+            ArrayList<String> deviceStatus = new ArrayList<>();
+            boolean switchVal = false;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 roomDataList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     //Toast.makeText(getContext(),ds.getKey(),Toast.LENGTH_SHORT).show();
+                    for(DataSnapshot ds2 : ds.getChildren()){
+                        ConfigDeviceData myConfig = ds2.getValue(ConfigDeviceData.class);
+                        deviceStatus.add(myConfig.getDeviceCondition());
+                    }
+                    if(deviceStatus.size() != 0){
+                        switchVal = true;
+                    }
                     roomDataList.add(new RoomAdapterData(ds.getKey() ,String.valueOf(ds.getChildrenCount())));
                 }
                 mRecyclerView.setAdapter(mAdapter);

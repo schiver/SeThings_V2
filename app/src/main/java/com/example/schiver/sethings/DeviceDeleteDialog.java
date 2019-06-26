@@ -86,7 +86,7 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef.child(devID).removeValue();
+                dbRef.child(devID).setValue(null);
             }
 
             @Override
@@ -102,7 +102,7 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
         dbRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef2.child(devID).removeValue();
+                dbRef2.child(devID).setValue(null);
             }
 
             @Override
@@ -117,7 +117,7 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
         dbRef3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef3.child(devID).removeValue();
+                dbRef3.child(devID).setValue(null);
             }
 
             @Override
@@ -133,7 +133,7 @@ public class DeviceDeleteDialog extends AppCompatDialogFragment {
         dbRef4.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef4.child(devID).removeValue();
+                dbRef4.child(devID).setValue(null);
             }
 
             @Override
