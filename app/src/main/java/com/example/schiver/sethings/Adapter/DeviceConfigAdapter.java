@@ -231,6 +231,7 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
     }
 
     public void switchOffConfig(Context context, String roomName, final String deviceID, String connectedDevice, String deviceAction, String deviceCondition, String deviceEvent, String deviceName, String deviceType, int deviceIcon){
+        SharedPref.saveSharefPref(context,roomName,"false");
         myDb3 = FirebaseDatabase.getInstance();
         dbRef3 = myDb3.getReference("SeThings-Config/"+roomName);
         final ConfigDeviceData myConfigData = new ConfigDeviceData(
