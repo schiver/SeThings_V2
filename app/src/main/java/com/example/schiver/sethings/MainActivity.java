@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 logout();
                 return true;
             case R.id.account:
+                Intent settingIntent = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(settingIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

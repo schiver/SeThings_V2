@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schiver.sethings.Model.DashboardData;
@@ -24,12 +25,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         public TextView mTextViewUsage;
         public TextView mTextViewDevice;
         public TextView mDetailsView;
+
         public DashboardViewHolder(@NonNull View itemView) {
             super(itemView);
             mTextViewRoom = itemView.findViewById(R.id.room_name);
             mTextViewDevice = itemView.findViewById(R.id.usage_view);
             mTextViewUsage = itemView.findViewById(R.id.usage_percentage);
             mDetailsView = itemView.findViewById(R.id.details_button);
+
         }
     }
 

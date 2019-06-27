@@ -1,5 +1,6 @@
 package com.example.schiver.sethings;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -141,5 +143,27 @@ public class ConfigActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dot_menu,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.logout:
+                logout();
+                return true;
+            case R.id.account:
+                Intent settingIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(settingIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void logout(){
+        SharedPref.saveSharefPref(getApplicationContext(),"session","false");
+        Intent walkThrougIntent = new Intent(getApplicationContext(),WalkthroughActivity.class);
+        startActivity(walkThrougIntent);
     }
 }

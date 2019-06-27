@@ -215,10 +215,10 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
         return myDialog;
     }
 
-    public void submitDevice(String room,String deviceId,String deviceType,String deviceName){
+    public void submitDevice(final String room,final String deviceId,final String deviceType,final String deviceName){
         myDb = FirebaseDatabase.getInstance();
         dbRef = myDb.getReference("SeThings-Device2/"+room+"/");
-        String deviceInfo = "Installed";
+        final String deviceInfo = "Installed";
         final DeviceListData deviceData = new DeviceListData(iconName,deviceId,deviceType,deviceName,deviceInfo);
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -259,18 +259,20 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
 
         myDb4 = FirebaseDatabase.getInstance();
         dbRef4 = myDb4.getReference("SeThings-Device_Usage/"+room+"/");
-        final DeviceUsageData myUsageData = new DeviceUsageData(
-                iconName,
-                deviceId,
-                deviceType,
-                deviceName,
-                deviceInfo,
-                0
-        );
+
         dbRef4.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef4.child(myUsageData.getDeviceID()).setValue(myUsageData);
+                DeviceUsageData myDataReturn = dataSnapshot.child(deviceId).getValue(DeviceUsageData.class);
+                DeviceUsageData myUsageData = new DeviceUsageData(
+                        iconName,
+                        deviceId,
+                        deviceType,
+                        deviceName,
+                        deviceInfo,
+                        (float) Math.floor(myDataReturn.getTotalUsage()*100)/100
+                );
+                dbRef4.child(deviceId).setValue(myUsageData);
             }
 
             @Override

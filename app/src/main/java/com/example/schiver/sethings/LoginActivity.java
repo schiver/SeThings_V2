@@ -116,6 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                             // Success Login
                             // Saving value for true session
                             SharedPref.saveSharefPref(getApplicationContext(),"session","true");
+                            SharedPref.saveSharefPref(getApplicationContext(), "username",loginData.getUsername());
+                            SharedPref.saveSharefPref(getApplicationContext(), "home",loginData.getHomeID());
                             Intent mainActivityIntent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(mainActivityIntent);
                             //Toast.makeText(LoginActivity.this, "Sukses Login", Toast.LENGTH_LONG).show();
