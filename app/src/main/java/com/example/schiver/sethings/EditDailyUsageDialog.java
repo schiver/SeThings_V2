@@ -12,35 +12,65 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.schiver.sethings.Model.RoomListData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class RoomDialog extends AppCompatDialogFragment {
-    private EditText inputRoomName;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EditDailyUsageDialog extends AppCompatDialogFragment {
+    private EditText inputPass,inputConfirmPass;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
-    FirebaseDatabase myDb2;
-    DatabaseReference dbRef2;
+    String homeId,editUsaget;
+    SeekBar averagePerDaySeekBar;
+    TextView averageValue;
+    boolean next = false;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_add_room,null);
-        inputRoomName = view.findViewById(R.id.room_name);
+        View view = inflater.inflate(R.layout.dialog_edit_daily_usage,null);
+
+        homeId = getArguments().getString("editHomeID");
+        averagePerDaySeekBar = view.findViewById(R.id.daily_average_seekbar);
+        averageValue = view.findViewById(R.id.seekbar_value);
+        averagePerDaySeekBar.setMax(50);
+        averagePerDaySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                averageValue.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.parseColor("#3e4a59"));
         // Initialize a new spannable string builder instance
-        SpannableStringBuilder ssBuilder = new SpannableStringBuilder("Enter room name");
+        SpannableStringBuilder ssBuilder = new SpannableStringBuilder("Daily Usage");
         // Apply the text color span
         ssBuilder.setSpan(
                 foregroundColorSpan,
                 0,
-                "Enter room name".length(),
+                "Daily Usage".length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         );
         builder.setView(view)
@@ -53,7 +83,9 @@ public class RoomDialog extends AppCompatDialogFragment {
                 }).setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        submitRoomData(inputRoomName.getText().toString());
+                        updateUsageSetting(averageValue.getText().toString(),homeId);
+                        //Toast.makeText(getContext(),"Username : "+userData,Toast.LENGTH_SHORT).show();
+                        //submitEditName(inputName.getText().toString(),userData);
                     }
                 });
 
@@ -69,37 +101,21 @@ public class RoomDialog extends AppCompatDialogFragment {
         return myDialog;
     }
 
-    public void submitRoomData(final String roomName){
-        myDb = FirebaseDatabase.getInstance();
-        dbRef = myDb.getReference("SeThings-Room");
 
-        final RoomListData roomData = new RoomListData(roomName);
-        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef.child(roomData.getRoomName()).setValue(roomData);
-                //Intent intent = getActivity().getIntent();
-                //startActivity(intent);
-            }
+   public void updateUsageSetting(final String energy, String homeId){
+       myDb = FirebaseDatabase.getInstance();
+       dbRef = myDb.getReference("SeThings-Usage_Config/"+homeId);
+       dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               dbRef.child("dailyAverage").setValue(Integer.parseInt(energy));
+               Toast.makeText(getContext(),"Daily average has been set",Toast.LENGTH_SHORT).show();
+           }
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        myDb2 = FirebaseDatabase.getInstance();
-        dbRef2 = myDb2.getReference("SeThings-Device2/");
-        dbRef2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef2.child(roomData.getRoomName()).setValue("");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+           }
+       });
+   }
 
 }

@@ -131,7 +131,7 @@ public class UsageFragment extends Fragment {
                     }
                     allEnergyUsage+=usageRoom;
                     DeviceUsageData myData = ds.getValue(DeviceUsageData.class);
-                    usageDataList.add(new UsageAdapterData(ds.getKey() ,String.valueOf(usageRoom)));
+                    usageDataList.add(new UsageAdapterData(ds.getKey() ,String.valueOf(Math.floor(usageRoom*100)/100)));
                     yValues.add(new PieEntry(usageRoom,ds.getKey()));
                     usageRoom = 0;
                 }

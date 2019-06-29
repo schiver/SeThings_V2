@@ -94,7 +94,7 @@ public class UsageDetailActivity extends AppCompatActivity {
                     deviceUsageList.add(
                             new DeviceUsageAdapterData(
                                     myData.getDeviceName(),
-                                    String.valueOf(myData.getTotalUsage())+" Kwh",
+                                    String.valueOf(Math.floor(myData.getTotalUsage()*1000)/1000)+" Kwh",
                                     String.valueOf(Math.floor(dataPercentUsage*100)/100)+"%",
                                      myData.getIcon(),
                                      colorProgress,

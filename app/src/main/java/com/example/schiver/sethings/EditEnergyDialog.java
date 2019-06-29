@@ -3,44 +3,64 @@ package com.example.schiver.sethings;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.example.schiver.sethings.Model.RoomListData;
+import com.example.schiver.sethings.Utils.AESUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class RoomDialog extends AppCompatDialogFragment {
-    private EditText inputRoomName;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EditEnergyDialog extends AppCompatDialogFragment {
+    private EditText inputPass,inputConfirmPass;
     FirebaseDatabase myDb;
     DatabaseReference dbRef;
-    FirebaseDatabase myDb2;
-    DatabaseReference dbRef2;
+    String homeId,editUsaget;
+    Spinner energyOption;
+    boolean next = false;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_add_room,null);
-        inputRoomName = view.findViewById(R.id.room_name);
+        View view = inflater.inflate(R.layout.dialog_edit_energy,null);
+        energyOption = view.findViewById(R.id.spinner_energy);
+        List<String> list = new ArrayList<String>();
+        list.add("900 VA");
+        list.add("1300 VA");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        dataAdapter.notifyDataSetChanged();
+        energyOption.setAdapter(dataAdapter);
+        homeId = getArguments().getString("editHomeID");
+
+
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.parseColor("#3e4a59"));
         // Initialize a new spannable string builder instance
-        SpannableStringBuilder ssBuilder = new SpannableStringBuilder("Enter room name");
+        SpannableStringBuilder ssBuilder = new SpannableStringBuilder("Home power edit");
         // Apply the text color span
         ssBuilder.setSpan(
                 foregroundColorSpan,
                 0,
-                "Enter room name".length(),
+                "Home power edir".length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         );
         builder.setView(view)
@@ -53,7 +73,7 @@ public class RoomDialog extends AppCompatDialogFragment {
                 }).setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        submitRoomData(inputRoomName.getText().toString());
+                        updateUsageSetting(energyOption.getSelectedItem().toString(),homeId);
                     }
                 });
 
@@ -69,37 +89,23 @@ public class RoomDialog extends AppCompatDialogFragment {
         return myDialog;
     }
 
-    public void submitRoomData(final String roomName){
-        myDb = FirebaseDatabase.getInstance();
-        dbRef = myDb.getReference("SeThings-Room");
 
-        final RoomListData roomData = new RoomListData(roomName);
-        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef.child(roomData.getRoomName()).setValue(roomData);
-                //Intent intent = getActivity().getIntent();
-                //startActivity(intent);
-            }
+   public void updateUsageSetting(final String energy, String homeId){
+       myDb = FirebaseDatabase.getInstance();
+       dbRef = myDb.getReference("SeThings-Usage_Config/"+homeId);
+       final String dataUpdate[] = energy.split(" ");
+       //Toast.makeText(getContext(),"Energy : "+dataUpdate[0],Toast.LENGTH_SHORT).show();
+       dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dbRef.child("energy").setValue(Integer.parseInt(dataUpdate[0]));
+                Toast.makeText(getContext(),"Home energy has been set",Toast.LENGTH_SHORT).show();
+           }
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        myDb2 = FirebaseDatabase.getInstance();
-        dbRef2 = myDb2.getReference("SeThings-Device2/");
-        dbRef2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dbRef2.child(roomData.getRoomName()).setValue("");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+           }
+       });
+   }
 
 }

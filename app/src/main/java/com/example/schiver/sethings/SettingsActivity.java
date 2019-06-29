@@ -54,6 +54,8 @@ public class SettingsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+
         data.add(new SettingsMenu("Usage Setting","Control your device usage",R.drawable.ic_setting_usage));
         data.add(new SettingsMenu("Account Setting","Update your profile",R.drawable.ic_person));
 

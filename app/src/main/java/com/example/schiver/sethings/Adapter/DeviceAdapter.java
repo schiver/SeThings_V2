@@ -98,7 +98,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     public void openDialogEdit(Context context, String deviceID){
         DeviceEditDialog editDialog = new DeviceEditDialog();
         Bundle param = new Bundle();
-        param.putString("devID",deviceID);;
+        param.putString("devID",deviceID);
         editDialog.setArguments(param);
         editDialog.show(((AppCompatActivity) context).getSupportFragmentManager(),"EDIT");
     }
