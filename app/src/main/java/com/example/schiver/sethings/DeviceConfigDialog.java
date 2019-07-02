@@ -252,7 +252,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                         dataAdapterSubCondition.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         mySubCondition1.add("Select option below");
                         mySubCondition1.add("Timer");
-                        mySubCondition1.add("Scheduled");
+
                         dataAdapterSubCondition.notifyDataSetChanged();
                         sSubCondition.setAdapter(dataAdapterSubCondition);
                     }else{
@@ -272,7 +272,7 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                         dataAdapterSubCondition.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         mySubCondition1.add("Select option below");
                         mySubCondition1.add("Timer");
-                        mySubCondition1.add("Scheduled");
+
                         dataAdapterSubCondition.notifyDataSetChanged();
                         sSubCondition.setAdapter(dataAdapterSubCondition);
                     }

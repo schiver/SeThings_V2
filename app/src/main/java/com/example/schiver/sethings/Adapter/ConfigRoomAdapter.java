@@ -168,7 +168,7 @@ public class ConfigRoomAdapter extends RecyclerView.Adapter<ConfigRoomAdapter.Co
         FirebaseDatabase myDb2 = FirebaseDatabase.getInstance();
         final DatabaseReference dbRef2 = myDb2.getReference("SeThings-Detail_Config/"+roomName);
         final ConfigDeviceDataCondition myCondition = new ConfigDeviceDataCondition(
-                "SWITCH_OFF",
+                "#",
                 "#",
                 "#",
                 "#",

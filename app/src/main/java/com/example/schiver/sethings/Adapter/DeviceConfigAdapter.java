@@ -267,7 +267,7 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
         myDb4 = FirebaseDatabase.getInstance();
         dbRef4 = myDb4.getReference("SeThings-Detail_Config/"+roomName+"/");
         final ConfigDeviceDataCondition myCondition = new ConfigDeviceDataCondition(
-                "SWITCH_OFF",
+                "#",
                 "#",
                 "#",
                 "#",
