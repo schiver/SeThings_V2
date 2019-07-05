@@ -112,15 +112,17 @@ public class ConfigActivity extends AppCompatActivity {
                         }else{
                             devInfo = dataDevice.getDeviceCondition();
                         }
-                        deviceDataList.add(
-                                new ConfigDeviceAdapterData(
-                                        dataDevice.getIcon(),
-                                        dataDevice.getDeviceName(),
-                                        dataDevice.getDeviceID(),
-                                        devInfo,
-                                        dataDevice.getDeviceType()
-                                )
-                        );
+                        if(!dataDevice.getDeviceType().equals("Sensor")){
+                            deviceDataList.add(
+                                    new ConfigDeviceAdapterData(
+                                            dataDevice.getIcon(),
+                                            dataDevice.getDeviceName(),
+                                            dataDevice.getDeviceID(),
+                                            devInfo,
+                                            dataDevice.getDeviceType()
+                                    )
+                            );
+                        }
                     }
                     mRecyclerView.setVisibility(View.VISIBLE);
                     mainFrame.setBackgroundColor(Color.parseColor("#F3F4F8"));

@@ -52,6 +52,7 @@ public class UsageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        SharedPref.saveSharefPref(getContext(),"page","");
         final View rootView =  inflater.inflate(R.layout.fragment_usage,container,false);
         labelPrediction1 = rootView.findViewById(R.id.label_prediction1);
         labelPrediction2 = rootView.findViewById(R.id.label_prediction2);

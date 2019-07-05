@@ -71,13 +71,13 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
         list.add("Sensor");
         list.add("Output");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dataAdapter.notifyDataSetChanged();
         optionType.setAdapter(dataAdapter);
         List<String> list2 = new ArrayList<String>();
         list2.add("Select option below");
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, list2);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dataAdapter.notifyDataSetChanged();
         optionName.setAdapter(dataAdapter2);
 
@@ -94,7 +94,7 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
                         list.add("Motion Sensor");
                         list.add("Temperature Sensor");
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, list);
-                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                         dataAdapter.notifyDataSetChanged();
                         optionName.setAdapter(dataAdapter);
                         // Adding some values to Spinner Name Sensor
@@ -111,7 +111,7 @@ public class DeviceEditDialog extends AppCompatDialogFragment {
                         list2.add("Rice Cooker");
                         list2.add("Refrigerator");
                         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, list2);
-                        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        dataAdapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                         dataAdapter2.notifyDataSetChanged();
                         optionName.setAdapter(dataAdapter2);
                         //Toast.makeText(parent.getContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();

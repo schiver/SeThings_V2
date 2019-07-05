@@ -138,10 +138,10 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
                 }).setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        submitConfig(roomName,deviceID,SharedPref.readSharedPref(getContext(),"myConfigID",""),sAction.getSelectedItem().toString(),"Configured",deviceID,deviceName,deviceType,deviceIcon);
                         getDetailConfig(view,roomName,deviceID);
+                        submitConfig(roomName,deviceID,SharedPref.readSharedPref(getContext(),"myConfigID",""),sAction.getSelectedItem().toString(),"Configured",deviceID,deviceName,deviceType,deviceIcon);
                         SharedPref.saveSharefPref(getContext(),roomName,"true");
-                        //Toast.makeText(getContext(), "Duration : "+deviceType, Toast.LENGTH_SHORT).show();
+
                         //Toast.makeText(getContext(), "Duration : "+String.valueOf(hour)+" "+String.valueOf(minutes), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getContext(), "SubCondition : "+sSubCondition.getSelectedItem(), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getContext(), "ID to be connected "+SharedPref.readSharedPref(getContext(),"myConfigID",""), Toast.LENGTH_SHORT).show();
@@ -536,7 +536,6 @@ public class DeviceConfigDialog extends AppCompatDialogFragment /* implements  T
 
     public void submitConfig(String roomName, final String deviceID, String connectedDevice, String deviceAction, String deviceCondition, String deviceEvent, String deviceName, String deviceType, int deviceIcon){
         // Grab all variable here
-
         myDb = FirebaseDatabase.getInstance();
         dbRef = myDb.getReference("SeThings-Config/"+roomName);
         final ConfigDeviceData myConfig = new ConfigDeviceData(

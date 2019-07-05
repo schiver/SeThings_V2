@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button logout;
     boolean session;
     TextView labelMenu1,labelGreet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +42,23 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+        if(SharedPref.readSharedPref(getApplicationContext(),"page","").equals("usage")){
+            bottomNav.setSelectedItemId(R.id.nav_usage);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new UsageFragment())
+                    .commit();
+        }else if(SharedPref.readSharedPref(getApplicationContext(),"page","").equals("device")){
+            bottomNav.setSelectedItemId(R.id.nav_devices);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new DevicesFragment())
+                    .commit();
+        }else{
+            //bottomNav.setOnNavigationItemSelectedListener(navListener);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment())
+                    .commit();
+        }
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment())
-                .commit();
 
 
 
@@ -79,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(walkThrougIntent);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             Fragment selectedFragment = null;
-
             switch (menuItem.getItemId()){
                 case R.id.nav_home :
                     selectedFragment = new HomeFragment();

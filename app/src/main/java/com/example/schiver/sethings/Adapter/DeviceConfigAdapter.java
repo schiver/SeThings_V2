@@ -118,6 +118,7 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
                                 SharedPref.readSharedPref(buttonView.getContext(),"Room",""),
                                 currentItem.getDeviceID()
                         );
+                        Toast.makeText(buttonView.getContext(),currentItem.getDeviceName()+" Switch On",Toast.LENGTH_SHORT).show();
                     }else{
                         //Toast.makeText(buttonView.getContext(),"Switch OFF",Toast.LENGTH_SHORT).show();
                         switchOffConfig(
@@ -137,6 +138,7 @@ public class DeviceConfigAdapter extends RecyclerView.Adapter<DeviceConfigAdapte
                                 SharedPref.readSharedPref(buttonView.getContext(),"Room",""),
                                 currentItem.getDeviceID()
                         );
+                        Toast.makeText(buttonView.getContext(),currentItem.getDeviceName()+" Switch Off",Toast.LENGTH_SHORT).show();
                     }
                 }
             });

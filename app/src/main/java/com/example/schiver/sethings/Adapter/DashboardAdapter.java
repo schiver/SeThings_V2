@@ -3,6 +3,7 @@ package com.example.schiver.sethings.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         public TextView mTextViewUsage;
         public TextView mTextViewDevice;
         public TextView mDetailsView;
+        public CardView cardHolder;
 
         public DashboardViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -32,7 +34,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             mTextViewDevice = itemView.findViewById(R.id.usage_view);
             mTextViewUsage = itemView.findViewById(R.id.usage_percentage);
             mDetailsView = itemView.findViewById(R.id.details_button);
-
+            cardHolder = itemView.findViewById(R.id.cardHolder);
         }
     }
 
@@ -56,6 +58,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         dashboardViewHolder.mTextViewUsage.setText(currentItem.getPercentage());
         dashboardViewHolder.mTextViewDevice.setText(currentItem.getInstalledDevice());
         dashboardViewHolder.mDetailsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent testIntent = new Intent(myContext,UsageDetailActivity.class);
+                SharedPref.saveSharefPref(myContext,"Room",currentItem.getRoom());
+                SharedPref.saveSharefPref(myContext,"RoomUsage",String.valueOf(currentItem.getTotalUsage()));
+                myContext.startActivity(testIntent);
+            }
+        });
+        dashboardViewHolder.cardHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent testIntent = new Intent(myContext,UsageDetailActivity.class);

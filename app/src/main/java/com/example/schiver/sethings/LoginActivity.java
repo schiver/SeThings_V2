@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     Timer timer;
     EditText inputUsername;
     EditText inputPassword;
+    TextView linkSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,14 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
         // Main Layput object
+        linkSignUp = findViewById(R.id.sign_upText);
+        linkSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  IntentSignUp = new Intent(getApplicationContext(),SignupActivity.class);
+                startActivity(IntentSignUp);
+            }
+        });
         myLayout = (ConstraintLayout) findViewById(R.id.mainLayout);
 
         Button btnSignIn = (Button) findViewById(R.id.btn_login);

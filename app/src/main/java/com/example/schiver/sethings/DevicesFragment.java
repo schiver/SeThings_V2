@@ -19,6 +19,7 @@ import com.example.schiver.sethings.Adapter.DeviceRoomAdapter;
 import com.example.schiver.sethings.Model.RoomAdapterData;
 import com.example.schiver.sethings.Model.RoomListData;
 import com.example.schiver.sethings.Utils.DeviceOperation;
+import com.example.schiver.sethings.Utils.SharedPref;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,8 +46,8 @@ public class DevicesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        SharedPref.saveSharefPref(getContext(),"page","");
         final View rootView = inflater.inflate(R.layout.fragment_devices,container,false);
-
         loadingBar = rootView.findViewById(R.id.progressBar);
         mRecyclerView = rootView.findViewById(R.id.room_recycler);
         mRecyclerView.setHasFixedSize(true);

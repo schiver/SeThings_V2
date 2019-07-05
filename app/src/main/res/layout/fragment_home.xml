@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/screenBgWhite">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,15 +37,16 @@
                     <android.support.constraint.ConstraintLayout
                         android:id="@+id/panel1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_menu_link">
 
                         <TextView
                             android:id="@+id/label1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="12dp"
                             android:layout_marginTop="8dp"
-                            android:text="Daily usage"
+                            android:text="Consumed energy"
                             android:textColor="@color/colorMainAppFont"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +56,7 @@
                             android:id="@+id/label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="4dp"
                             android:layout_marginTop="32dp"
                             android:text="Total usage"
                             app:layout_constraintStart_toEndOf="@+id/usage_image"
@@ -65,7 +66,7 @@
                             android:id="@+id/label_total_usage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="4dp"
                             android:layout_marginTop="56dp"
                             android:text="0"
                             android:textSize="30sp"
@@ -89,7 +90,7 @@
                             android:id="@+id/usage_image"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="12dp"
                             android:layout_marginTop="32dp"
                             android:src="@drawable/home_usage"
                             app:layout_constraintStart_toStartOf="parent"
@@ -106,12 +107,13 @@
                     <android.support.constraint.ConstraintLayout
                         android:id="@+id/panel2"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_menu_link">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="12dp"
                             android:layout_marginTop="8dp"
                             android:text="Devices"
                             android:textColor="@color/colorMainAppFont"
@@ -163,7 +165,6 @@
                 </android.support.v7.widget.CardView>
             </GridLayout>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/content_recycler"
             android:layout_width="wrap_content"
@@ -175,7 +176,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topContent">
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/dashboad_recycler"
                 android:layout_width="wrap_content"
@@ -186,7 +186,6 @@
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"

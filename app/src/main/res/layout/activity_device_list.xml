@@ -86,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="4dp"
-            android:text="Configure your installed device here"
-            android:textColor="@color/colorMainAppLight"
+            android:text="Edit or remove your installed device here"
+            android:textColor="@color/colorMainAppFont"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelRoomName" />
     </android.support.constraint.ConstraintLayout>
